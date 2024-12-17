@@ -9,7 +9,7 @@ type Props = {
   user: any
 }
 
-const FactoryNameCell: FC<Props> = ({user}) => (
+const VersionNameCell: FC<Props> = ({user}) => (
   <div className='d-flex align-items-center'>
     {/* begin:: Avatar */}
     <Link to={`detail/${user.version_id}`}>
@@ -22,4 +22,4 @@ const FactoryNameCell: FC<Props> = ({user}) => (
   </div>
 )
 
-export {FactoryNameCell}
+export {VersionNameCell}

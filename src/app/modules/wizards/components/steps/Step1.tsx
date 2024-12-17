@@ -56,49 +56,59 @@ const handleDistrictChange = (selected: any) => {
 
 
 
-  const getValues = async (mainKey: string | undefined, subKey?: string, newValue?: string | any | undefined, type?: string) => {
+const getValues = async ( mainKey: string | undefined, subKey?: string, newValue?: string | any | undefined, type?: string ) => {
+  if (!newValue) {
+    localStorage.removeItem(`${mainKey}-${subKey}`);
+    localStorage.removeItem(`${mainKey}-${subKey}-toDisplay`);
+  }
 
-    if (!newValue) {
-      localStorage.removeItem(`${mainKey}-${subKey}`)
-      localStorage.removeItem(`${mainKey}-${subKey}-toDisplay`)
-    }
+  if (!mainKey) return;
 
-    if (!mainKey) return; 
+  let valueToStore: any = null;
 
-      // Ensure both subKey and newValue are defined before setting them in localStorage
-      if (mainKey && subKey && (newValue !== undefined && newValue !== null)) {
-
-     if (type === "text" || type === "number") {
-      // valueToStore = newValue;
-      localStorage.setItem(`${mainKey}-${subKey}`, newValue);
+  // Ensure both subKey and newValue are defined before setting them in localStorage
+  if (mainKey && subKey && (newValue !== undefined && newValue !== null)) {
+    if (type === "text" || type === "number") {
+      valueToStore = newValue;
+      localStorage.setItem(`${mainKey}-${subKey}`, valueToStore);
     } else if (type === "file") {
       if (newValue) {
-        // setSelectedFile({file: newValue, code:subKey});
-      }
-        let data = await getBase64(newValue)
-        let { base64, name }:any = data;
+        console.log("💖💖💖💖💖",newValue);
+        const data = await getBase64(newValue);
+        const { base64, name }: any = data;
+        valueToStore = base64;
         localStorage.setItem(`${mainKey}-${subKey}`, base64);
         localStorage.setItem(`${mainKey}-${subKey}-toDisplay`, name);
-    } else if (type === "multi-choice") {
-      // valueToStore = JSON.stringify(newValue);
-      localStorage.setItem(`${mainKey}-${subKey}`, JSON.stringify(newValue));
-    } else if (type === "choice") {
-      // valueToStore = newValue.label;
-      localStorage.setItem(`${mainKey}-${subKey}`, JSON.stringify(newValue));
+      }
+    } else if (type === "multi-choice" || type === "choice") {
+      valueToStore = JSON.stringify(newValue);
+      localStorage.setItem(`${mainKey}-${subKey}`, valueToStore);
     }
   }
-  
-    setData((prevData) => ({
+
+  // Update state with the latest value after resolving asynchronous operations
+  setData((prevData) => {
+    const updatedSubData = subKey
+      ? { [subKey]: valueToStore }
+      : { value: valueToStore };
+
+    return {
       ...((prevData ?? {}) as NestedObject), // Fallback to empty object if prevData is undefined
       [mainKey]: {
-        ...(prevData?.[mainKey] as any ?? {}),
-        ...(subKey ? { [subKey]: newValue } : { value: newValue }),
+        ...(prevData?.[mainKey] ?? {}),
+        ...updatedSubData,
       },
-    }));
+    };
+  });
+console.log(data);
+  // Logging for debugging
+  console.log("Updated state:", {
+    mainKey,
+    subKey,
+    valueToStore,
+  });
+};
 
-    // console.log("data =========>", data);
-    
-  }
   
   useEffect(() => {
     const storedData: any = {};
@@ -129,7 +139,6 @@ const handleDistrictChange = (selected: any) => {
               dataTransfer.items.add(myFile);
               fileInput.files = dataTransfer.files;
             
-              console.log("File input now contains:", fileInput.files[0]);
             } catch (error) {
               console.error("Error decoding Base64 string:", error);
             }
@@ -159,175 +168,138 @@ const handleDistrictChange = (selected: any) => {
 
 
   
-  const renderInput = (inputType: string, description: string, classified: string, column:any, code:string, main_key: string, duplicates:boolean, options?:[string] ) => {
+  const renderInput = (inputType: string, description: string, classified: string, column:any, code:string, main_key: string, duplicates:boolean, options:[string] ) => {
     const isTable = inputType?.startsWith('T');
-    const [file, fileType] = inputType?.startsWith('f') ? inputType.split("-") : [];
-    switch (inputType) {
-      case 'text':
-      case 'number':
-        return (
-          <div className={classified === 'title' ? 'ms-3' : 'ms-7'}>
-            <input
-              type={inputType}
-              placeholder={description}
-              className="form-control"
-              min={1}
-              onChange={(e) => getValues(main_key, code, e.target.value, inputType)}
-              defaultValue={localStorage.getItem(`${main_key}-${code}`) ?? ''}
-              disabled={displayFor == "ws"}
-            />
-          </div>
-        );
-  
-      case 'file-D':
-      case 'file-P':
-        return (<>
-          <input
-            type={file}
-            name={code}
-            className="form-control"
-            onChange={(e: any) => getValues(main_key, code, e.target.files[0], file)}
-            disabled={displayFor == "ws"}
-          />
-          {localStorage.getItem(`${main_key}-${code}`) && (
-              <a className='fs-5 text-primary text-decoration-underline cursor-pointer' onClick={()=>{handleDownload(localStorage.getItem(`${main_key}-${code}`))}}>File: {localStorage.getItem(`${main_key}-${code}-toDisplay`)}</a>
-          )}
-        </>);
-  
-      case 'multi-choice':
-        return (
-          <Select
-            className={classified === 'title' ? 'react-select-styled ms-3' : 'react-select-styled ms-7'}
-            classNamePrefix="react-select"
-            options={options}
-            isMulti
-            onChange={(e: any) => getValues(main_key, code, e, inputType)}
-            defaultValue={
-              localStorage.getItem(`${main_key}-${code}`)
-                ? JSON.parse(localStorage.getItem(`${main_key}-${code}`) || '[]')
-                : []
-            }
-            isDisabled={displayFor == "ws"}
-            name={code}
-            />
-        );
-  
-      case 'choice':
-        const filteredOptions = code === '110F2'
-        ? districtOptions.filter((district:any) => district.provinceId === selectedProvince)
-        : code === '110F1'
-        ? villageOptions.filter((village:any) => village.districtId === selectedDistrict)
-        : options;
+  const commonClass = classified === 'title' ? 'ms-3' : 'ms-7';
+  const disabled = displayFor === 'ws';
+  const storedValue = localStorage.getItem(`${main_key}-${code}`);
 
-        return (
-          <Select
-            className={classified === 'title' ? 'react-select-styled ms-3' : 'react-select-styled ms-7'}
-            classNamePrefix="react-select"
-            options={filteredOptions}
-            onChange={(e) => {
-              if (code == '110F3') handleProvinceChange(e); // Province change handler
-              if (code == '110F2') handleDistrictChange(e); // District change handler
-              getValues(main_key, code, e, inputType);
-            }}
-            value={
-              localStorage.getItem(`${main_key}-${code}`)
-                ? JSON.parse(localStorage.getItem(`${main_key}-${code}`) as string) 
-                : undefined 
-            }
-            isDisabled={displayFor == "ws"}
-          />
-        );
-  
-      case 'multi-text':
-        return (
-          <div id={code} className={classified === 'title' ? 'ms-3' : 'ms-7'}>
-            <DynamicTable data={column} main_key={main_key} sub_key={code} duplicates={duplicates} disabled={displayFor == "ws"} />
-          </div>
-        );
-  
-      default:
-        if (isTable) {
-          return (
-            <div id={code} className={classified === 'title' ? 'ms-3' : 'ms-7'}>
-              <DynamicTable data={column} main_key={main_key} sub_key={code} duplicates={duplicates} disabled={displayFor == "ws"} />
-            </div>
-          );
-        }
-        return null;
-    }
+  const handleSelectChange = (e:any) => {
+    if (code === '110F3') handleProvinceChange(e);
+    if (code === '110F2') handleDistrictChange(e);
+    getValues(main_key, code, e, inputType);
   };
 
+  const renderFileLink = () => (
+    storedValue && (
+      <a
+        className="fs-5 text-primary text-decoration-underline cursor-pointer"
+        onClick={() => handleDownload(storedValue)}
+      >
+        File: {localStorage.getItem(`${main_key}-${code}-toDisplay`)}
+      </a>
+    )
+  );
 
-  const [showCommentPopup, setShowCommentPopup] = useState(false);
-  const [currentComment, setCurrentComment] = useState('');
-  const [activeInput, setActiveInput] = useState<string>(""); // Keep track of the active input for comments
-  const [comments, setComments] = useState<{ [key: string]: string }>({}) 
- // Handle opening the popup and load any existing comment
-    const handleIconClick = (code: string, inputName: string) => {
-      setActiveInput(code)
-      setCurrentComment(comments[code] || '') // Load any existing comment
-      setShowCommentPopup(true)
-    }
-  
-    // Handle closing the popup
-    const handleClosePopup = () => {
-      setShowCommentPopup(false)
-      setCurrentComment('')
-    }
-  
-    // Handle saving the comment and update the comment display
-    const handleSaveComment = () => {
-      setComments({ ...comments, [activeInput]: currentComment }) // Save the comment for the active input
-      handleClosePopup()
-    }
-  
+  switch (inputType) {
+    case 'text':
+    case 'number':
+      return (
+        <div className={commonClass}>
+          <input
+            type={inputType}
+            placeholder={description}
+            className="form-control"
+            min={1}
+            onChange={(e) => getValues(main_key, code, e.target.value, inputType)}
+            defaultValue={storedValue ?? ''}
+            disabled={disabled}
+          />
+        </div>
+      );
 
+    case 'file-D':
+    case 'file-P':
+      return (
+        <>
+          <input
+            type="file"
+            name={code}
+            className="form-control"
+            onChange={(e:any) => getValues(main_key, code, e.target.files[0], 'file')}
+            disabled={disabled}
+          />
+          {renderFileLink()}
+        </>
+      );
+
+    case 'multi-choice':
+      return (
+        <Select
+          className={`react-select-styled ${commonClass}`}
+          classNamePrefix="react-select"
+          options={options}
+          isMulti
+          onChange={(e) => getValues(main_key, code, e, inputType)}
+          defaultValue={storedValue ? JSON.parse(storedValue) : []}
+          isDisabled={disabled}
+          name={code}
+        />
+      );
+
+    case 'choice':
+      const filteredOptions = (() => {
+        if (code === '110F2') return districtOptions.filter((d:any) => d.provinceId === selectedProvince);
+        if (code === '110F1') return villageOptions.filter((v:any) => v.districtId === selectedDistrict);
+        return options;
+      })();
+
+      return (
+        <Select
+          className={`react-select-styled ${commonClass}`}
+          classNamePrefix="react-select"
+          options={filteredOptions}
+          onChange={handleSelectChange}
+          value={storedValue ? JSON.parse(storedValue) : undefined}
+          isDisabled={disabled}
+        />
+      );
+
+    case 'multi-text':
+      return (
+        <div id={code} className={commonClass}>
+          <DynamicTable
+            data={column}
+            main_key={main_key}
+            sub_key={code}
+            duplicates={duplicates}
+            disabled={disabled}
+          />
+        </div>
+      );
+
+    default:
+      if (isTable) {
+        return (
+          <div id={code} className={commonClass}>
+            <DynamicTable
+              data={column}
+              main_key={main_key}
+              sub_key={code}
+              duplicates={duplicates}
+              disabled={disabled}
+            />
+          </div>
+        );
+      }
+      return null;
+  }
+};
 
   const renderFormItems = (form: any[]) => {
     return form.map((item, index) => {
       if (item.classified === 'heading') {
         return null;
       }
-  const showIcon = item.input_type !== null && displayFor == "ws";
       return (
         
         <div className="form-group mb-3" key={index}>
           {item.classified === "title"
             ? <div className='d-flex justify-content-between'> 
             <h4 className='ms-3'>{item.code} {item.description}</h4> 
-            {showIcon && (
-            <div className='d-flex' >
-            <span style={{cursor:"pointer"}} onClick={() => handleIconClick(item.code, item.description)}>
-              <KTIcon iconName="messages" className='fs-2' />
-            </span>
-              {comments[item.code] && (
-                <p className="ms-3" title={comments[item.code]}>
-                  {comments[item.code].length > 20
-                    ? `${comments[item.code].slice(0, 20)}...`
-                    : comments[item.code]}
-                </p>
-              )}
-
-            </div>
-          )}
             </div>
             : <div className='d-flex justify-content-between'> 
             <span className='fs-5 ms-7'>{item.code} {item.description}</span> 
-            {showIcon && (
-            <div className='d-flex' >
-            <span style={{cursor:"pointer"}} onClick={() => handleIconClick(item.code, item.description)}>
-              <KTIcon iconName="messages" className='fs-2' />
-            </span>
-              {comments[item.code] && (
-                <p className="ms-3" title={comments[item.code]}>
-                  {comments[item.code].length > 20
-                    ? `${comments[item.code].slice(0, 20)}...`
-                    : comments[item.code]}
-                </p>
-              )}
-
-            </div>
-          )}
             </div>}
           {renderInput(item.input_type, item.description, item.classified, item.column, item.code, item.main_key ? item.main_key : item.code, item.duplicates, item.options)}
         </div>
@@ -337,9 +309,11 @@ const handleDistrictChange = (selected: any) => {
 
   return (
     <div className='' style={{ width: '100%' }}>
-    <h2 className='mb-5'>
-      100 ຂໍ້ມູນທົ່ວໄປຂອງວິສາຫະກິດ
-    </h2>
+      <div className='d-flex justify-content-between mb-5'>
+      <h2> 100 ຂໍ້ມູນທົ່ວໄປຂອງວິສາຫະກິດ </h2>
+      <input type="text" className="form-control w-300px" name='search' placeholder='search'/>
+      </div>
+
     <div className='accordion' id='kt_accordion_1'>
       {Object.keys(forms).map((formKey, idx) => (
         <div className='accordion-item' key={idx}>
@@ -368,28 +342,7 @@ const handleDistrictChange = (selected: any) => {
         </div>
       ))}
     </div>
-        {/* Modal for Comment Input */}
-        <Modal show={showCommentPopup} onHide={handleClosePopup}>
-        <Modal.Header closeButton>
-          <Modal.Title>{activeInput}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <textarea
-            className="form-control"
-            placeholder="Enter your comment"
-            value={currentComment}
-            onChange={(e) => setCurrentComment(e.target.value)}
-          />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClosePopup}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleSaveComment}>
-            Save Comment
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      
   </div>
   
   );

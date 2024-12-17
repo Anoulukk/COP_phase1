@@ -8,7 +8,7 @@ const GET_USERS_URL = `${API_URL}/users/query`;
 
 const getUsers = (query: string): Promise<UsersQueryResponse> => {
   return axios
-    .get(`${USER_URL}`)
+    .get(`${GET_USERS_URL}?${query}`)
     .then((d: AxiosResponse<UsersQueryResponse>) => d.data);
 };
 

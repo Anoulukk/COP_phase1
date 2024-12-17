@@ -139,7 +139,6 @@ const DynamicTable: FC<DynamicTableProps> = ({ data, main_key, sub_key, duplicat
   const formatGroupLabel = (data:any) => (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       <a style={{ fontSize: 15, }} href={data.url} target='_blank'>{data.label}</a>
-      {/* <span style={{ fontSize: 12, color: '#999' }}>{data.options.length} options</span> */}
     </div>
   );
 

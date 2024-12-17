@@ -13,9 +13,11 @@ interface NestedObject {
 }
 interface FormsData {
   formsData: any;
+  displayFor: string;
+
 }
 
-const Step2: FC<FormsData> = ({formsData}) => {
+const Step2: FC<FormsData> = ({formsData, displayFor}) => {
   const [data, setData] = useState<NestedObject>();
   const [selectedProvince, setSelectedProvince] = useState<number | null>(null);
   const [selectedDistrict, setSelectedDistrict] = useState<number | null>(null);

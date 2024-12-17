@@ -36,6 +36,14 @@ const PrivateRoutes = () => {
             </SuspensedView>
           }
         />
+        <Route
+          path='dashboard/newForm/*'
+          element={
+            <SuspensedView>
+              <WizardsPage />
+            </SuspensedView>
+          }
+        />
         {/* <Route
           path='apps/user-management/*'
           element={

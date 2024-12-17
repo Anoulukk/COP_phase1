@@ -16,8 +16,7 @@ import { ToolbarWrapper } from "../../../../_metronic/layout/components/toolbar"
 import { Content } from "../../../../_metronic/layout/components/content";
 import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
 import { Tooltip } from "react-bootstrap";
-import { Step1Comment } from "./steps/Step1Comment";
-import { form100, form200, form500 } from "./Form100_800Data";
+import { form100, form200, form300, form400, form500 } from "./Form100_800Data";
 import { createFormData } from "../components/core/_requests";
 import Swal from "sweetalert2";
 interface NestedObject {
@@ -56,31 +55,63 @@ const Horizontal: FC<HorizontalProps> = ({ enterprise_group, version_id }) => {
     setSubmitButton(stepper.currentStepIndex === stepper.totalStepsNumber);
   };
 
-  useEffect(() => {
-    const storedData: any = {};
-    Object.keys(localStorage).forEach((key) => {
-      const [mainKey, subKey] = key.split("-");
-      const value = localStorage.getItem(key);
-      let check = mainKey.match(/^\d+/);
-
-      if (mainKey && subKey && value && check) {
-        if (!storedData[mainKey]) {
-          storedData[mainKey] = {};
-        }
-        storedData[mainKey][subKey] = value;
-      }
-    });
-
-    setData(storedData);
-  }, []);
-
-  const submitStep = (values: ICreateAccount, actions: FormikValues) => {
+  // useEffect(() => {
+  //   const storedData: any = {};
+  //   Object.keys(localStorage).forEach((key) => {
+  //     const [mainKey, subKey] = key.split("-");
+  //     const value = localStorage.getItem(key);
+  
+  //     if (mainKey && subKey && value) {
+  //       const firstChar = mainKey.charAt(0); // Get the first character of mainKey
+  //       if (!isNaN(parseInt(firstChar))) {
+          
+  //         const category = parseInt(firstChar) * 100; // Calculate category (e.g., 1 -> 100, 2 -> 200)
+    
+  //         if (!storedData[category]) {
+  //           storedData[category] = {};
+  //         }
+  //         if (!storedData[category][mainKey]) {
+  //           storedData[category][mainKey] = {};
+  //         }
+  //         storedData[category][mainKey][subKey] = value;
+  //       }
+  //     }
+  //   });
+  
+  //   setData(storedData);
+  // }, [isSubmitButton]);
+  
+  
+  const submitStep = (saveToDB:boolean) => {
+    console.log("🚀 ~ 😉😉😉 ~ submitFor:", saveToDB)
     if (!stepper) {
       return;
     }
-
-    console.log("data saved:::💖💖💖💖💖💖💖💖💖💖💖", data);
-    if (stepper.currentStepIndex !== stepper.totalStepsNumber) {
+    const storedData: any = {};
+    Object.keys(localStorage).forEach((key) => {
+      const parts = key.split("-");
+      if (parts.length !== 2) return; // Ignore keys that don't have exactly two parts
+    
+      const [mainKey, subKey] = parts;
+      const value = localStorage.getItem(key);
+  
+      if (mainKey && subKey && value) {
+        const firstChar = mainKey.charAt(0); // Get the first character of mainKey
+        if (!isNaN(parseInt(firstChar))) {
+          
+          const category = parseInt(firstChar) * 100; // Calculate category (e.g., 1 -> 100, 2 -> 200)
+    
+          if (!storedData[category]) {
+            storedData[category] = {};
+          }
+          if (!storedData[category][mainKey]) {
+            storedData[category][mainKey] = {};
+          }
+          storedData[category][mainKey][subKey] = value;
+        }
+      }
+    });
+    if (!saveToDB) {
       stepper.goNext();
     } else {
       Swal.fire({
@@ -90,12 +121,8 @@ const Horizontal: FC<HorizontalProps> = ({ enterprise_group, version_id }) => {
         showConfirmButton: false,
         timer: 1500,
       });
-
-      console.log("data saved:::", data);
-      createFormData({ data: data });
-
-      actions.resetForm();
-      actions.resetForm();
+      console.log("data saved:::💖💖💖💖💖💖💖💖💖💖💖", storedData);
+      createFormData({ data: storedData });
     }
 
     setSubmitButton(stepper.currentStepIndex === stepper.totalStepsNumber);
@@ -124,7 +151,6 @@ const Horizontal: FC<HorizontalProps> = ({ enterprise_group, version_id }) => {
   return (
     <>
       <ToolbarWrapper />
-
       <Content>
         <div
           ref={stepperRef}
@@ -167,7 +193,7 @@ const Horizontal: FC<HorizontalProps> = ({ enterprise_group, version_id }) => {
               ))}
             </div>
             <div>
-              <button type="button" className="btn btn-lg btn-primary ">
+              <button type="button" className="btn btn-lg btn-primary" onClick={()=>submitStep(true)}>
                 ບັນທຶກ
               </button>
               <button type="button" className="btn btn-light-primary ms-3">
@@ -179,38 +205,32 @@ const Horizontal: FC<HorizontalProps> = ({ enterprise_group, version_id }) => {
           <div className="card">
             <div className="card-body">
               <div className=" bg-body rounded" style={{ width: "100%" }}>
-                <Formik
-                  validationSchema={currentSchema}
-                  initialValues={initValues}
-                  onSubmit={submitStep}
-                >
+                <Formik validationSchema={currentSchema} initialValues={initValues} onSubmit={()=>submitStep(false)}>
                   {() => (
-                    <Form
-                      className=""
-                      id="kt_create_account_form"
-                      placeholder={undefined}
-                    >
-                      <div
-                        className="current"
-                        data-kt-stepper-element="content"
-                      >
+                    <Form className="" id="kt_create_account_form" placeholder={undefined}>
+                      <div className="current" data-kt-stepper-element="content">
                         <Step1
                           formsData={form100}
                           displayFor={enterprise_group}
                         />
-                        {/* <Step1Comment /> */}
                       </div>
 
                       <div data-kt-stepper-element="content">
-                        <Step2 formsData={form200} />
+                        <Step2 
+                          formsData={form200}
+                          displayFor={enterprise_group} />
                       </div>
 
                       <div data-kt-stepper-element="content">
-                        <Step3 />
+                        <Step3
+                         formsData={form300}
+                         displayFor={enterprise_group}/>
                       </div>
 
                       <div data-kt-stepper-element="content">
-                        <Step4 />
+                        <Step4 
+                          formsData={form400}
+                          displayFor={enterprise_group}/>
                       </div>
 
                       <div data-kt-stepper-element="content">
@@ -228,28 +248,23 @@ const Horizontal: FC<HorizontalProps> = ({ enterprise_group, version_id }) => {
                             className="btn btn-lg btn-light-primary me-3"
                             data-kt-stepper-action="previous"
                           >
-                            <KTIcon
-                              iconName="arrow-left"
-                              className="fs-4 me-1"
-                            />
+                            <KTIcon iconName="arrow-left" className="fs-4 me-1" />
                             ກັບຄືນ
                           </button>
                         </div>
 
                         <div>
-                          <button
-                            type="submit"
-                            className="btn btn-lg btn-primary me-3"
-                          >
-                            <span className="indicator-label">
-                              {!isSubmitButton && "ຖັດໄປ"}
-                              {isSubmitButton && "ບັນທຶກ"}
-                              <KTIcon
-                                iconName="arrow-right"
-                                className="fs-3 ms-2 me-0"
-                              />
-                            </span>
-                          </button>
+                      {!isSubmitButton && 
+                      <button
+                      type="submit"
+                      className="btn btn-lg btn-primary me-3"
+                    >
+                      <span className="indicator-label">
+                        {!isSubmitButton && "ຖັດໄປ"}
+                        <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0"/>
+                      </span>
+                    </button>}
+                          
                         </div>
                       </div>
                     </Form>

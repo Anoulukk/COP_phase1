@@ -44,3 +44,29 @@ export const handleDownload = (data: any) => {
       reader.onerror = reject;
     });
   }
+
+  export function getFileForInput(base64String:string, key:string){
+
+    const fileName = localStorage.getItem(`${key}-toDisplay`) || '';
+          const base64Data = base64String.replace(/^data:.*;base64,/, '');
+          if (base64Data) {
+            try {
+              const binaryEncoded = btoa(base64String);
+              const binaryData = atob(binaryEncoded);
+              const byteArray = Uint8Array.from(binaryData, char => char.charCodeAt(0));
+         
+              const myFile = new File([byteArray], fileName, {
+                type: base64String.match(/^data:([^;]+);base64,/)?.[1], // Set this to the correct MIME type
+              });
+            
+              const dataTransfer = new DataTransfer();
+              dataTransfer.items.add(myFile);
+              return dataTransfer.files;
+            
+            } catch (error) {
+              console.error("Error decoding Base64 string:", error);
+            }
+          } else {
+            console.log("No file found in localStorage for the specified key.");
+          }
+  }

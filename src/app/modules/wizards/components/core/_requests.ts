@@ -14,9 +14,10 @@ const getFormData = (): Promise<UsersQueryResponse> => {
 
 const createFormData = (formdata: any): Promise<UsersQueryResponse | undefined> => {
   console.log("🚀 ~ createFormData ~ formdata:", formdata)
-  return axios
-    .post(`${GET_USERS_URL}/add-form-data`, formdata)
-    .then((response: any) => response.data)
+  return formdata;
+  // return axios
+  //   .post(`${GET_USERS_URL}/add-form-data`, formdata)
+  //   .then((response: any) => response.data)
 };
 
 

@@ -7,7 +7,7 @@ import {UserSelectionCell} from './UserSelectionCell'
 import {UserCustomHeader} from './UserCustomHeader'
 import {UserSelectionHeader} from './UserSelectionHeader'
 import {User} from '../../core/_models'
-import { FactoryNameCell } from './FactoryNameCell'
+import { VersionNameCell } from './VersionNameCell'
 import { DateCell } from './DateCell'
 import { StatusCell } from './StatusCell'
 
@@ -18,14 +18,14 @@ const usersColumns: ReadonlyArray<Column<User>> = [
     Cell: ({...props}) => <UserSelectionCell id={props.data[props.row.index].id} />,
   },
   {
-    Header: (props) => <UserCustomHeader tableProps={props} title='version' className='min-w-125px' />,
+    Header: (props) => <UserCustomHeader tableProps={props} title='ສະບັບ' className='min-w-125px' />,
     id: 'version',
     Cell: ({...props}) => <UserInfoCell user={props.data[props.row.index]} />,
   },
   {
-    Header: (props) => <UserCustomHeader tableProps={props} title='ຊື່ໂຮງງານ' className='min-w-125px' />,
+    Header: (props) => <UserCustomHeader tableProps={props} title='ຊື່ສະບັບ' className='min-w-125px' />,
     accessor: 'name',
-    Cell: ({...props}) => <FactoryNameCell user={props.data[props.row.index]} />,
+    Cell: ({...props}) => <VersionNameCell user={props.data[props.row.index]} />,
   },
   {
     Header: (props) => (
@@ -43,7 +43,7 @@ const usersColumns: ReadonlyArray<Column<User>> = [
   },
   {
     Header: (props) => (
-      <UserCustomHeader tableProps={props} title='Actions' className='text-end min-w-100px' />
+      <UserCustomHeader tableProps={props} title='ຈັດການເພີ່ມຕື່ມ' className='text-end min-w-100px' />
     ),
     id: 'actions',
     Cell: ({...props}) => <UserActionsCell id={props.data[props.row.index].id} />,
