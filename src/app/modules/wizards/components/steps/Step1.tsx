@@ -3,9 +3,10 @@ import {KTIcon} from '../../../../../_metronic/helpers'
 import {ErrorMessage, Field} from 'formik'
 import DynamicTable from '../DynamicTable';
 import Select from 'react-select';
-import { Button, Modal } from 'react-bootstrap';
+import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
 import { provinceOptions, districtOptions, villageOptions } from '../Form100_800Data'
 import { handleDownload, getBase64 } from '../FunctionHelper'; 
+import { Tooltip } from 'react-bootstrap';
 interface NestedObject {
   [key: string]: {
     [key: string]: string | { value: string };
@@ -288,20 +289,52 @@ console.log(data);
 
   const renderFormItems = (form: any[]) => {
     return form.map((item, index) => {
+      console.log("🚀 ~ returnform.map ~ item:", item)
       if (item.classified === 'heading') {
         return null;
       }
       return (
-        
         <div className="form-group mb-3" key={index}>
-          {item.classified === "title"
-            ? <div className='d-flex justify-content-between'> 
-            <h4 className='ms-3'>{item.code} {item.description}</h4> 
+          {item.classified === "title" ? (
+            <div className="d-flex justify-content-between">
+              {item.tooltip ? (
+                <OverlayTrigger
+                  placement="right"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={(props) => (
+                    <Tooltip id="button-tooltip" {...props}>
+                      {item.tooltip}
+                    </Tooltip>
+                  )}
+                >
+                  <h4 className="ms-3">
+                    {item.code} {item.description}{" "}
+                    <i className="fas fa-exclamation-circle ms-2 fs-7"></i>
+                  </h4>
+                </OverlayTrigger>
+              ) : (
+                <h4 className="ms-3">
+                  {item.code} {item.description}
+                </h4>
+              )}
             </div>
-            : <div className='d-flex justify-content-between'> 
-            <span className='fs-5 ms-7'>{item.code} {item.description}</span> 
-            </div>}
-          {renderInput(item.input_type, item.description, item.classified, item.column, item.code, item.main_key ? item.main_key : item.code, item.duplicates, item.options)}
+          ) : (
+            <div className="d-flex justify-content-between">
+              <span className="fs-5 ms-7">
+                {item.code} {item.description}
+              </span>
+            </div>
+          )}
+          {renderInput(
+            item.input_type,
+            item.description,
+            item.classified,
+            item.column,
+            item.code,
+            item.main_key ? item.main_key : item.code,
+            item.duplicates,
+            item.options
+          )}
         </div>
       );
     });
