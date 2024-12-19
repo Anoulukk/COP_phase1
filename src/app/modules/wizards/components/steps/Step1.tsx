@@ -259,13 +259,13 @@ console.log(data);
     case 'multi-text':
       return (
         <div id={code} className={commonClass}>
-          <DynamicTable
+          {/* <DynamicTable
             data={column}
             main_key={main_key}
             sub_key={code}
             duplicates={duplicates}
             disabled={disabled}
-          />
+          /> */}
         </div>
       );
 
@@ -273,13 +273,13 @@ console.log(data);
       if (isTable) {
         return (
           <div id={code} className={commonClass}>
-            <DynamicTable
+            {/* <DynamicTable
               data={column}
               main_key={main_key}
               sub_key={code}
               duplicates={duplicates}
               disabled={disabled}
-            />
+            /> */}
           </div>
         );
       }
@@ -289,7 +289,6 @@ console.log(data);
 
   const renderFormItems = (form: any[]) => {
     return form.map((item, index) => {
-      console.log("🚀 ~ returnform.map ~ item:", item)
       if (item.classified === 'heading') {
         return null;
       }
