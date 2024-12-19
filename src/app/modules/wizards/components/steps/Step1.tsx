@@ -158,27 +158,26 @@ const Step1: FC<FormsData> = ({ formsData, displayFor }) => {
         return "Error fetch data in the firebase: " + error.message;
       }
     };
-    const renderFileLink = () => {
-      console.log(CodeID);
-      const fileInput: any = document.getElementsByName(CodeID)[0];
-      console.log(fileInput);
-      if (fileInput && fileInput.name == CodeID) {
-        return (
-          <a
-            className="fs-5 text-primary text-decoration-underline cursor-pointer"
-            onClick={() => handleDownload(linkFile)}
-          >
-            File: {NameFile}
-          </a>
-        )
-      }
-      return null;
-    };
-    renderFileLink()
+    // const renderFileLink = () => {
+    //   console.log(CodeID);
+    //   const fileInput: any = document.getElementsByName(CodeID)[0];
+    //   console.log(fileInput);
+    //   if (fileInput && fileInput.name == CodeID) {
+    //     return (
+    //       <a
+    //         className="fs-5 text-primary text-decoration-underline cursor-pointer"
+    //         onClick={() => handleDownload(linkFile)}
+    //       >
+    //         File: {NameFile}
+    //       </a>
+    //     )
+    //   }
+    //   return null;
+    // };
+    // renderFileLink()
     fetchAllDocs();
   }, []);
   console.log("show data all ++", files);
-
   // useEffect(() => {
   //   const storedData: any = {};
   //   Object.keys(localStorage).forEach((key) => {
@@ -239,12 +238,11 @@ const Step1: FC<FormsData> = ({ formsData, displayFor }) => {
     const isTable = inputType?.startsWith('T');
     const commonClass = classified === 'title' ? 'ms-3' : 'ms-7';
     const disabled = displayFor === 'ws';
-    // const fileDetails: any = [];
-    // const fileDetails: { linkFile: any, NameFile: any, CodeID: any }[] = [];
-    // let linkFile : any 
-    //     let NameFile : any
-    //     let CodeID : any 
-    //     let fileInput : any 
+    const fileDetails: any = [];
+    let linkFile: any
+    let NameFile: any
+    let CodeID: any
+    let fileInput: any
     const storedValue = localStorage.getItem(`${main_key}-${code}`);
     // get fileName, fileURL
     // for (const [key, fileData] of Object.entries(files)) {
@@ -268,24 +266,24 @@ const Step1: FC<FormsData> = ({ formsData, displayFor }) => {
       getValues(main_key, code, e, inputType);
     };
 
-    // fileDetails.forEach((data: any) => {
-    //   linkFile = data?.linkFile;
-    //   NameFile = data?.NameFile;
-    //   CodeID = data?.CodeID;
-    //   fileInput = document.getElementsByName(CodeID)[0];
-    // });
+    fileDetails.forEach((data: any) => {
+      linkFile = data?.linkFile;
+      NameFile = data?.NameFile;
+      CodeID = data?.CodeID;
+      fileInput = document.getElementsByName(CodeID)[0];
+    });
 
-    // const renderFileLink = (linkFile: any, NameFile: any) => (
-    //     linkFile && (
-    //       <a
-    //         className="fs-5 text-primary text-decoration-underline cursor-pointer"
-    //         onClick={() => handleDownload(linkFile)}
-    //       >
-    //         File: {NameFile}
-    //         {/* File: {localStorage.getItem(`${main_key}-${code}-toDisplay`)} */}
-    //       </a>
-    //     )
-    //   );
+    const renderFileLink = () => (
+      linkFile && (
+        <a
+          className="fs-5 text-primary text-decoration-underline cursor-pointer"
+          onClick={() => handleDownload(linkFile)}
+        >
+          File: {NameFile}
+          {/* File: {localStorage.getItem(`${main_key}-${code}-toDisplay`)} */}
+        </a>
+      )
+    );
     // const renderFileLink = (linkFile: any, NameFile: any, CodeID: any) => {
     //   console.log(CodeID);
     //   const fileInput: any = document.getElementsByName(CodeID)[0];
