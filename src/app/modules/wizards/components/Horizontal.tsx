@@ -87,30 +87,30 @@ const Horizontal: FC<HorizontalProps> = ({ enterprise_group, version_id }) => {
     if (!stepper) {
       return;
     }
-    const storedData: any = {};
-    Object.keys(localStorage).forEach((key) => {
+    const storedData: Record<number, Record<string, Record<string, string>>> = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (!key) continue;
+
       const parts = key.split("-");
-      if (parts.length !== 2) return; // Ignore keys that don't have exactly two parts
-    
+      if (parts.length !== 2) continue;
+
       const [mainKey, subKey] = parts;
       const value = localStorage.getItem(key);
-  
-      if (mainKey && subKey && value) {
-        const firstChar = mainKey.charAt(0); // Get the first character of mainKey
-        if (!isNaN(parseInt(firstChar))) {
-          
-          const category = parseInt(firstChar) * 100; // Calculate category (e.g., 1 -> 100, 2 -> 200)
-    
-          if (!storedData[category]) {
-            storedData[category] = {};
-          }
-          if (!storedData[category][mainKey]) {
-            storedData[category][mainKey] = {};
-          }
-          storedData[category][mainKey][subKey] = value;
-        }
-      }
-    });
+
+      if (!value) continue;
+
+      const firstChar = mainKey.charAt(0);
+      const categoryNum = parseInt(firstChar);
+
+      if (isNaN(categoryNum)) continue;
+
+      const category = categoryNum * 100;
+
+      storedData[category] = storedData[category] || {};
+      storedData[category][mainKey] = storedData[category][mainKey] || {};
+      storedData[category][mainKey][subKey] = value;
+    }
     if (!saveToDB) {
       stepper.goNext();
     } else {

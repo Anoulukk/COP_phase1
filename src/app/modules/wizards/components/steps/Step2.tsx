@@ -121,7 +121,7 @@ const [forms, setForms] = useState<any>(formsData);
   }, []);
 
 
-  const renderInput = (inputType: string, description: string, classified: string, column:any, code:string, main_key: string,  duplicates:boolean, options?:[string]) => {
+  const renderInput = (inputType: string, LAdescription: string, classified: string, column:any, code:string, main_key: string,  duplicates:boolean, options?:[string]) => {
     const isTable = inputType?.startsWith('T');
     switch (inputType) {
       case 'text':
@@ -130,7 +130,7 @@ const [forms, setForms] = useState<any>(formsData);
           <div className={classified === 'title' ? 'ms-3' : 'ms-7'}>
             <input
               type={inputType}
-              placeholder={description}
+              placeholder={LAdescription}
               className="form-control"
               min={1}
               onChange={(e) => getValues(main_key, code, e.target.value, inputType)}
@@ -139,14 +139,15 @@ const [forms, setForms] = useState<any>(formsData);
           </div>
         );
   
-      case 'file':
+        case 'file-D':
+        case 'file-P':
         return (
           <input
-            type={inputType}
+            type="file"
             name={code}
             className={classified === 'title' ? 'form-control ms-3' : 'form-control ms-7'}
             onChange={(e: any) => getValues(main_key, code, e.target.files[0], inputType)}
-            
+            accept="image/*,.pdf"
           />
         );
   
@@ -218,9 +219,9 @@ const [forms, setForms] = useState<any>(formsData);
       return (
         <div className="form-group mb-3" key={index}>
           {item.classified === "title"
-            ? <h4 className='ms-3'>{item.code} {item.description}</h4>
-            : <span className='fs-5 ms-7'>{item.code} {item.description}</span>}
-          {renderInput(item.input_type, item.description, item.classified, item.column, item.code, item.main_key ? item.main_key : item.code, item.duplicates, item.options)}
+            ? <h4 className='ms-3'>{item.code} {item.LAdescription}</h4>
+            : <span className='fs-5 ms-7'>{item.code} {item.LAdescription}</span>}
+          {renderInput(item.input_type, item.LAdescription, item.classified, item.column, item.code, item.main_key ? item.main_key : item.code, item.duplicates, item.options)}
         </div>
       );
     });
@@ -244,7 +245,7 @@ const [forms, setForms] = useState<any>(formsData);
                 aria-expanded='false'
                 aria-controls={`kt_accordion_2_body_${idx + 1}`}
               >
-                {formKey.replace('form', '')} {forms[formKey][0]?.description}
+                {formKey.replace('form', '')} {forms[formKey][0]?.LAdescription}
               </button>
             </h2>
             <div

@@ -369,81 +369,104 @@ export const form100:any = {
     ],
   };
 
+
 export const form200:any = {
     form210: [
-        { classified: "heading", code: "200",  descriptionEN: "", descriptionLA: "ທີ່ຕັ້ງຂອງໂຮງງານ", input_type: null },
-        { classified: "title", code: "210A",  descriptionEN: "", descriptionLA: "ທີ່ຕັ້ງໂຮງງານ", input_type: null },
-        { classified: "sub_head", code: "210A1",  descriptionEN: "", descriptionLA: "ຖະໜົນ", input_type: "text", main_key : "210A" },
-        { classified: "sub_head", code: "210A2",  descriptionEN: "", descriptionLA: "ບ້ານ", input_type: "choice", options: provinceOptions, main_key : "210A" },
-        { classified: "sub_head", code: "210A3",  descriptionEN: "", descriptionLA: "ເມືອງ", input_type: "choice", options: districtOptions, main_key : "210A" },
-        { classified: "sub_head", code: "210A4",  descriptionEN: "", descriptionLA: "ແຂວງ", input_type: "choice", options: villageOptions, main_key : "210A" },
-        { classified: "sub_head", code: "210A5",  descriptionEN: "", descriptionLA: "ເຂດເສດຖະກິດພິເສດ", input_type: "choice", options: specialAreaOptions, main_key : "210A" },
+        { classified: "heading", code: "210", ENdescription: "Factory location",LAdescription: "ທີ່ຕັ້ງຂອງໂຮງງານ", input_type: null },
+        { classified: "title", code: "210A", ENdescription: "Factory location",LAdescription: "ທີ່ຕັ້ງໂຮງງານ", input_type: null },
+        { classified: "sub_head", code: "210A1", ENdescription: "street",LAdescription: "ຖະໜົນ", input_type: "text", main_key : "210A" },
+        { classified: "sub_head", code: "210A2", ENdescription: "village",LAdescription: "ບ້ານ", input_type: "choice", options: provinceOptions, main_key : "210A" },
+        { classified: "sub_head", code: "210A3", ENdescription: "District",LAdescription: "ເມືອງ", input_type: "choice", options: districtOptions, main_key : "210A" },
+        { classified: "sub_head", code: "210A4", ENdescription: "Province",LAdescription: "ແຂວງ", input_type: "choice", options: villageOptions, main_key : "210A" },
+        { classified: "sub_head", code: "210A5", ENdescription: "Special Economic Zones (SEZs)",LAdescription: "ເຂດເສດຖະກິດພິເສດ", input_type: "choice", options: specialAreaOptions, main_key : "210A" },
       
-        { classified: "title", code: "210B",  descriptionEN: "", descriptionLA: "ແຜນທີ່ໂຮງງານ", input_type: "file-P" },
-        { classified: "title", code: "210C",  descriptionEN: "", descriptionLA: "ຕຳແໜ່ງພິກັດ GPS (ລະບົບ UTM)", input_type: "text" },
-        { classified: "sub_head", code: "210C1",  descriptionEN: "", descriptionLA: "Zone", input_type: "text", main_key : "210C" },
-        { classified: "sub_head", code: "210C2",  descriptionEN: "", descriptionLA: "ພິກັດ Easting: E", input_type: "text", main_key : "210C" },
-        { classified: "sub_head", code: "210C3",  descriptionEN: "", descriptionLA: "ພິກັດ Northing: N", input_type: "text", main_key : "210C" },
+        { classified: "title", code: "210B", ENdescription: "Factory map",LAdescription: "ແຜນທີ່ໂຮງງານ", input_type: "file-P", main_key : "210" },
+        { classified: "title", code: "210C", ENdescription: "GPS Coordinates (UTM)",LAdescription: "ຕຳແໜ່ງພິກັດ GPS (ລະບົບ UTM)", input_type: "text", main_key : "210" },
+        { classified: "sub_head", code: "210C1", ENdescription: "Zone",LAdescription: "Zone", input_type: "text", main_key : "210C" },
+        { classified: "sub_head", code: "210C2", ENdescription: "Easting: E",LAdescription: "ພິກັດ Easting: E", input_type: "text", main_key : "210C" },
+        { classified: "sub_head", code: "210C3", ENdescription: "Northing: N",LAdescription: "ພິກັດ Northing: N", input_type: "text", main_key : "210C" },
       ],
       form220: [
-        { classified: "heading", code: "220",  descriptionEN: "", descriptionLA: "ສະພາບພື້ນທີ່ອ້ອມຂ້າງໂຮງງານ", input_type: null },
-        { classified: "title", code: "220A",  descriptionEN: "", descriptionLA: "ພື້ນທີ່ຕິດກັບໂຮງງານ", input_type: null },
-        { classified: "sub_head", code: "220A1",  descriptionEN: "", descriptionLA: "ທິດເໜືອ", input_type: "text", main_key : "220A" },
-        { classified: "sub_head", code: "220A2",  descriptionEN: "", descriptionLA: "ທິດໃຕ້", input_type: "text", main_key : "220A" },
-        { classified: "sub_head", code: "220A3",  descriptionEN: "", descriptionLA: "ທິດຕາເວັນອອກ", input_type: "text", main_key : "220A" },
-        { classified: "sub_head", code: "220A4",  descriptionEN: "", descriptionLA: "ທິດຕາເວັນຕົກ", input_type: "text", main_key : "220A" },
+        { classified: "heading", code: "220", ENdescription: "Area surrounding the factory",LAdescription: "ສະພາບພື້ນທີ່ອ້ອມຂ້າງໂຮງງານ", input_type: null, tooltip:"ເປັນສ່ວນໜື່ງຂອງເອກະສານປະກອບສະເໜີອອກໃບຢັ້ງຢືນດຳເນີນກິດຈະການໂຮງງານ (ມາດຕາ 14 ຂໍ້ຕົກລົງ ວ່າດ້ວຍການຄຸ້ມຄອງໂຮງງານ ເລກທີ 0264/ອຄ.ກອຫ, ວັນທີ 15 ມີນາ 2019)" },
+        { classified: "title", code: "220A", ENdescription: "Adjacent area",LAdescription: "ພື້ນທີ່ຕິດກັບໂຮງງານ", input_type: null },
+        { classified: "sub_head", code: "220A1", ENdescription: "North",LAdescription: "ທິດເໜືອ", input_type: "text", main_key : "220A" },
+        { classified: "sub_head", code: "220A2", ENdescription: "South",LAdescription: "ທິດໃຕ້", input_type: "text", main_key : "220A" },
+        { classified: "sub_head", code: "220A3", ENdescription: "east",LAdescription: "ທິດຕາເວັນອອກ", input_type: "text", main_key : "220A" },
+        { classified: "sub_head", code: "220A4", ENdescription: "West",LAdescription: "ທິດຕາເວັນຕົກ", input_type: "text", main_key : "220A" },
   
-        { classified: "title", code: "220B",  descriptionEN: "", descriptionLA: "ແຜນຜັງສະແດງໃຫ້ເຫັນທີ່ຕັ້ງໂຮງງານ ໃນຂອບເຂດລັດສະໝີ 500 ແມັດ", input_type: "file-P" },
-        { classified: "title", code: "220C",  descriptionEN: "", descriptionLA: "ພື້ນທີ່ອ້ອມຂ້າງໂຮງງານ ", input_type: null },
-        { classified: "sub_head", code: "220C1",  descriptionEN: "", descriptionLA: "ຊຸມຊົນ", input_type: "text", main_key : "220C" },
-        { classified: "sub_head", code: "220C2",  descriptionEN: "", descriptionLA: "ແຫຼ່ງນໍ້າ", input_type: "text", main_key : "220C" },
-        { classified: "sub_head", code: "220C3",  descriptionEN: "", descriptionLA: "ໂຮງຮຽນ", input_type: "text", main_key : "220C" },
-        { classified: "sub_head", code: "220C4",  descriptionEN: "", descriptionLA: "ໂຮງໝໍ ຫຼື ສຸກສາລາ", input_type: "text", main_key : "220C" },
-        { classified: "sub_head", code: "220C5",  descriptionEN: "", descriptionLA: "ວັດວາອາຮາມ", input_type: "text", main_key : "220C" },
-        { classified: "sub_head", code: "220C6",  descriptionEN: "", descriptionLA: "ສະຖານທີ່ປະຫວັດສາດ ຫຼື ບູຮານວັດຖຸ", input_type: "text", main_key : "220C" },
-        { classified: "sub_head", code: "220C7",  descriptionEN: "", descriptionLA: "ເຂດອະນຸລັກຊີວະນານາພັນ", input_type: "text", main_key : "220C" },
-        { classified: "sub_head", code: "220C8",  descriptionEN: "", descriptionLA: "ແຫຼ່ງທ່ອງທ່ຽວ", input_type: "text", main_key : "220C" },
-        { classified: "sub_head", code: "220C9",  descriptionEN: "", descriptionLA: "ອື່ນໆ (ລະບຸ)", input_type: "text", main_key : "220C" },
+        { classified: "title", code: "220B", ENdescription: "factory surrounding areas map (radius of 500 meters)",LAdescription: "ແຜນຜັງສະແດງໃຫ້ເຫັນທີ່ຕັ້ງໂຮງງານ ໃນຂອບເຂດລັດສະໝີ 500 ແມັດ", input_type: "file-P" },
+        { classified: "title", code: "220C", ENdescription: "Surrounding area",LAdescription: "ພື້ນທີ່ອ້ອມຂ້າງໂຮງງານ ", input_type: null },
+        { classified: "sub_head", code: "220C1", ENdescription: "community",LAdescription: "ຊຸມຊົນ", input_type: "text", main_key : "220C" },
+        { classified: "sub_head", code: "220C2", ENdescription: "Water source",LAdescription: "ແຫຼ່ງນໍ້າ", input_type: "text", main_key : "220C" },
+        { classified: "sub_head", code: "220C3", ENdescription: "School",LAdescription: "ໂຮງຮຽນ", input_type: "text", main_key : "220C" },
+        { classified: "sub_head", code: "220C4", ENdescription: "hospital or health station",LAdescription: "ໂຮງໝໍ ຫຼື ສຸກສາລາ", input_type: "text", main_key : "220C" },
+        { classified: "sub_head", code: "220C5", ENdescription: "temple",LAdescription: "ວັດວາອາຮາມ", input_type: "text", main_key : "220C" },
+        { classified: "sub_head", code: "220C6", ENdescription: "Archaeological site",LAdescription: "ສະຖານທີ່ປະຫວັດສາດ ຫຼື ບູຮານວັດຖຸ", input_type: "text", main_key : "220C" },
+        { classified: "sub_head", code: "220C7", ENdescription: "conservation area",LAdescription: "ເຂດອະນຸລັກຊີວະນານາພັນ", input_type: "text", main_key : "220C" },
+        { classified: "sub_head", code: "220C8", ENdescription: "tourist attraction",LAdescription: "ແຫຼ່ງທ່ອງທ່ຽວ", input_type: "text", main_key : "220C" },
+        { classified: "sub_head", code: "220C9", ENdescription: "Another (specify)",LAdescription: "ອື່ນໆ (ລະບຸ)", input_type: "text", main_key : "220C" },
       ],
       form230: [
-        { classified: "heading", code: "230",  descriptionEN: "", descriptionLA: "ການນຳໃຊ້ພື້ນທີ່, ອາຄານ ແລະ ສິ່ງປຸກສ້າງພາຍໃນໂຮງງານ", input_type: null },
-        { classified: "title", code: "231",  descriptionEN: "", descriptionLA: "ເນື້ອທີ່ ແລະ ການນຳໃຊ້ພື້ນທີ່", input_type: null },
-        { classified: "sub_head", code: "231A",  descriptionEN: "", descriptionLA: "ເນື້ອທີ່ທັງໝົດ (ຕາແມັດ)", input_type: "number", main_key : "231" },
-        { classified: "sub_head", code: "231B",  descriptionEN: "", descriptionLA: "ພື້ນທີ່ສີຂຽວ (ສ່ວນຮ້ອຍ)", input_type: "number", main_key : "231" },
-        { classified: "sub_head", code: "231C",  descriptionEN: "", descriptionLA: "ການນຳໃຊ້ພື້ນທີ່", input_type: "T2-1", column:{columnHead:[{id:1, title:"ລຳດັບ", inputType:"No"},{id:2, title:"ຊື່ພື້ນທີ່", inputType:"text-area" },{id:3, title:"ເນື້ອທີ່ (ຕາແມັດ)", inputType:"text-area" },{id:4, title:"ສ່ວນຮ້ອຍ", inputType:"text-area" },{id:5, title:"ໝາຍເຫດ", inputType:"text-area" }] }, main_key : "231"},
-        { classified: "sub_head", code: "231D",  descriptionEN: "", descriptionLA: "ແຜນຜັງການນຳໃຊ້ພື້ນທີ່", input_type: "file-P", main_key : "231" },
+        { classified: "heading", code: "230", ENdescription: "Area, buildings and structures within the factory",LAdescription: "ການນຳໃຊ້ພື້ນທີ່, ອາຄານ ແລະ ສິ່ງປຸກສ້າງພາຍໃນໂຮງງານ", input_type: null },
+        { classified: "title", code: "231", ENdescription: "Area and Utilization",LAdescription: "ເນື້ອທີ່ ແລະ ການນຳໃຊ້ພື້ນທີ່", input_type: null },
+        { classified: "sub_head", code: "231A", ENdescription: "Total Area (Square meter)",LAdescription: "ເນື້ອທີ່ທັງໝົດ (ຕາແມັດ)", input_type: "number", main_key : "231" },
+        { classified: "sub_head", code: "231B", ENdescription: "green space (percent)",LAdescription: "ພື້ນທີ່ສີຂຽວ (ສ່ວນຮ້ອຍ)", input_type: "number", main_key : "231" },
+        { classified: "sub_head", code: "231C", ENdescription: "Area Utilization detail",LAdescription: "ການນຳໃຊ້ພື້ນທີ່", input_type: "T2-1", 
+          column:
+          {
+            columnHead:[
+              {id:1, ENdescription: "No", LAdescription:"ລຳດັບ", inputType:"No"},
+              {id:2, ENdescription: "Area_name", LAdescription:"ຊື່ພື້ນທີ່", inputType:"text-area" },
+              {id:3, ENdescription: "Area_Square_meter", LAdescription:"ເນື້ອທີ່ (ຕາແມັດ)", inputType:"text-area" },
+              {id:4, ENdescription: "Percent", LAdescription:"ສ່ວນຮ້ອຍ", inputType:"text-area" },
+              {id:5, ENdescription: "Remarks", LAdescription:"ໝາຍເຫດ", inputType:"text-area" }
+            ] 
+          }, main_key : "231"
+        },
+        { classified: "sub_head", code: "231D", ENdescription: "Space Utilization Layout",LAdescription: "ແຜນຜັງການນຳໃຊ້ພື້ນທີ່", input_type: "file-P", main_key : "231" },
       
-        { classified: "title", code: "232",  descriptionEN: "", descriptionLA: "ອາຄານ ແລະ ສິ່ງປຸກສ້າງ", input_type: null },
-        { classified: "sub_head", code: "232A",  descriptionEN: "", descriptionLA: "ຈຳນວນອາຄານ ແລະ ສິ່ງປຸກສ້າງ", input_type: "text", main_key : "232" },
-        { classified: "sub_head", code: "232B",  descriptionEN: "", descriptionLA: "ຂໍ້ມູນອາຄານ ແລະ ສິ່ງແວດລ້ອມ", input_type: "T2-2", column:{columnHead:[{id:1, title:"ລຳດັບ", inputType:"No"},{id:2, title:"ຊື່ອາຄານ", inputType:"text-area" },{id:3, title:"ລັກສະນະອາຄານ", inputType:"text-area" },{id:4, title:"ຂະໜາດອາຄານ", inputType:"text-area" },{id:5, title:"ການນຳໃຊ້/ການນຳໃຊ້ສະເພາະ", inputType:"text-area" }] }, main_key : "232" },
-        { classified: "sub_head", code: "232C",  descriptionEN: "", descriptionLA: "ໃບອະນຸຍາດປຸກສ້າງໂຮງງານ ເລກທີ", input_type: "text", main_key : "232" },
+        { classified: "title", code: "232", ENdescription: "Buildings and structures",LAdescription: "ອາຄານ ແລະ ສິ່ງປຸກສ້າງ", input_type: null },
+        { classified: "sub_head", code: "232A", ENdescription: "Number of Buildings and structures",LAdescription: "ຈຳນວນອາຄານ ແລະ ສິ່ງປຸກສ້າງ", input_type: "text", main_key : "232" },
+        { classified: "sub_head", code: "232B", ENdescription: "Buildings and structures detail",LAdescription: "ຂໍ້ມູນອາຄານ ແລະ ສິ່ງແວດລ້ອມ", input_type: "T2-2", 
+          column:
+          {columnHead:
+            [
+              {id:1, ENdescription: "No", LAdescription:"ລຳດັບ", inputType:"No"},
+              {id:2, ENdescription: "Buildings_and_structures_name", LAdescription:"ຊື່ອາຄານ", inputType:"text-area" },
+              {id:3, ENdescription: "Describing_Buildings", LAdescription:"ລັກສະນະອາຄານ", inputType:"text-area" },
+              {id:4, ENdescription: "Building_size", LAdescription:"ຂະໜາດອາຄານ", inputType:"text-area" },
+              {id:5, ENdescription: "Usability", LAdescription:"ການນຳໃຊ້/ການນຳໃຊ້ສະເພາະ", inputType:"text-area" }
+            ] 
+          }, main_key : "232" 
+        },
+        { classified: "sub_head", code: "232C", ENdescription: "Construction Permit No.",LAdescription: "ໃບອະນຸຍາດປຸກສ້າງໂຮງງານ ເລກທີ", input_type: "text", main_key : "232" },
       
-        { classified: "title", code: "232D",  descriptionEN: "", descriptionLA: "ແຜນຜັງການກໍ່ສ້າງ ແລະ ລະບົບເຕັກນິກໂຮງງານ", input_type: null },
-        { classified: "sub_head", code: "232D1",  descriptionEN: "", descriptionLA: "ແຜນຜັງສະແດງສິ່ງປຸກສ້າງໃນບໍລິເວນໂຮງງານ", input_type: "file-P", main_key : "232D" },
-        { classified: "sub_head", code: "232D2",  descriptionEN: "", descriptionLA: "ແຜນຜັງກໍ່ສ້າງອາຄານຜະລິດ (ຮູບດ້ານໜ້າ, ຂ້າງ, ຫຼັງ ແລະ ຮູບຕັດ)", input_type: "file-P", main_key : "232D" },
-        { classified: "sub_head", code: "232D3",  descriptionEN: "", descriptionLA: "ແຜນຜັງການກໍ່ສ້າງສາງເກັບມ້ຽນເຄມີ", input_type: "file-P", main_key : "232D" },
+        { classified: "title", code: "232D", ENdescription: "Layout plans",LAdescription: "ແຜນຜັງການກໍ່ສ້າງ ແລະ ລະບົບເຕັກນິກໂຮງງານ", input_type: null },
+        { classified: "sub_head", code: "232D1", ENdescription: "Land plot layout indicating structures and buildings for industrail Area",LAdescription: "ແຜນຜັງສະແດງສິ່ງປຸກສ້າງໃນບໍລິເວນໂຮງງານ", input_type: "file-P", main_key : "232D" },
+        { classified: "sub_head", code: "232D2", ENdescription: "Factory building layout",LAdescription: "ແຜນຜັງກໍ່ສ້າງອາຄານຜະລິດ (ຮູບດ້ານໜ້າ, ຂ້າງ, ຫຼັງ ແລະ ຮູບຕັດ)", input_type: "file-P", main_key : "232D" },
+        { classified: "sub_head", code: "232D3", ENdescription: "Chemical storage layout",LAdescription: "ແຜນຜັງການກໍ່ສ້າງສາງເກັບມ້ຽນເຄມີ", input_type: "file-P", main_key : "232D" },
       ],
       form240: [
-        { classified: "heading", code: "240",  descriptionEN: "", descriptionLA: "ອາຄານ ແລະ ພື້ນທີ່ຄວບຄຸມ ", input_type: null },
-        { classified: "sub_head", code: "240A",  descriptionEN: "", descriptionLA: "ຫ້ອງເກັບສານເຄມີ", input_type: "text", main_key : "240" },
-        { classified: "sub_head", code: "240B",  descriptionEN: "", descriptionLA: "ຫ້ອງເກັບສິ່ງເສດເຫຼືອເຄມີ", input_type: "text", main_key : "240" },
-        { classified: "sub_head", code: "240C",  descriptionEN: "", descriptionLA: "ອາຄານ ຫຼື ພື້ນທີ່ເກັບວັດຖຸດິບ", input_type: "text", main_key : "240" },
-        { classified: "sub_head", code: "240D",  descriptionEN: "", descriptionLA: "ອາຄານ ຫຼື ພື້ນທີ່ເກັບເຊື້ອໄຟ", input_type: "text", main_key : "240" },
+        { classified: "heading", code: "240", ENdescription: "Controlled Area",LAdescription: "ອາຄານ ແລະ ພື້ນທີ່ຄວບຄຸມ ", input_type: null },
+        { classified: "sub_head", code: "240A", ENdescription: "Chemical storage detail",LAdescription: "ຫ້ອງເກັບສານເຄມີ", input_type: "text", main_key : "240" },
+        { classified: "sub_head", code: "240B", ENdescription: "Chemical waste storage detail",LAdescription: "ຫ້ອງເກັບສິ່ງເສດເຫຼືອເຄມີ", input_type: "text", main_key : "240" },
+        { classified: "sub_head", code: "240C", ENdescription: "raw material storage detail",LAdescription: "ອາຄານ ຫຼື ພື້ນທີ່ເກັບວັດຖຸດິບ", input_type: "text", main_key : "240" },
+        { classified: "sub_head", code: "240D", ENdescription: "fuel detail",LAdescription: "ອາຄານ ຫຼື ພື້ນທີ່ເກັບເຊື້ອໄຟ", input_type: "text", main_key : "240" },
       ],
       form250: [
-        { classified: "heading", code: "250",  descriptionEN: "", descriptionLA: "ເອກະສານທີ່ກ່ຽວຂ້ອງ", input_type: null },
-        { classified: "sub_head", code: "250A",  descriptionEN: "", descriptionLA: "ໃບອະນຸຍາດນຳໃຊ້ທີ່ດິນ", input_type: "text", main_key : "250" },
-        { classified: "sub_head", code: "250B",  descriptionEN: "", descriptionLA: "ໃບອະນຸຍາດປຸກສ້າງໂຮງງານ", input_type: "text", main_key : "250" },
-        { classified: "sub_head", code: "250C",  descriptionEN: "", descriptionLA: "ໃບອະນຸຍາດສ້າງສາງເກັບມ້ຽນເຄມີ", input_type: "text", main_key : "250" },
+        { classified: "heading", code: "250", ENdescription: "Related documents",LAdescription: "ເອກະສານທີ່ກ່ຽວຂ້ອງ", input_type: null },
+        { classified: "sub_head", code: "250A", ENdescription: "License to Utilize Land and Operate a Business",LAdescription: "ໃບອະນຸຍາດນຳໃຊ້ທີ່ດິນ", input_type: "text", main_key : "250" },
+        { classified: "sub_head", code: "250B", ENdescription: "Construction Permit",LAdescription: "ໃບອະນຸຍາດປຸກສ້າງໂຮງງານ", input_type: "text", main_key : "250" },
+        { classified: "sub_head", code: "250C", ENdescription: "Chemical storage construction Permit",LAdescription: "ໃບອະນຸຍາດສ້າງສາງເກັບມ້ຽນເຄມີ", input_type: "text", main_key : "250" },
       ]
     }
     //*********** ******************************** 300 *******************************************/
     export const form300:any = {
       form310: [
-        { classified: "heading", code: "310",  descriptionEN: "", descriptionLA: "ການນຳໃຊ້ວັດຖຸດິບ, ເຊື້ອໄຟ ແລະ ສານເຄມີ", input_type: null },
-        { classified: "title", code: "311",  descriptionEN: "", descriptionLA: "ວັດຖຸດິບ", input_type: null },
-        { classified: "sub_head", code: "311A",  descriptionEN: "", descriptionLA: "ວັດຖຸດິບທັງໝົດ (ຊະນິດ)", input_type: "number", main_key : "311" },
-        { classified: "sub_head", code: "311B",  descriptionEN: "", descriptionLA: "ຂໍ້ມູນວັດຖຸດິບ", input_type: "T3-1",
+        { classified: "heading", code: "310", ENdescription:"raw materials, Fuel and Chemical", LAdescription: "ການນຳໃຊ້ວັດຖຸດິບ, ເຊື້ອໄຟ ແລະ ສານເຄມີ", input_type: null },
+        { classified: "title", code: "311", ENdescription:"raw materials and essential supplies for production", LAdescription: "ວັດຖຸດິບ", input_type: null },
+        { classified: "sub_head", code: "311A", ENdescription:"Total raw materials (type)", LAdescription: "ວັດຖຸດິບທັງໝົດ (ຊະນິດ)", input_type: "number", main_key : "311" },
+        { classified: "sub_head", code: "311B", ENdescription:"Details of raw materials", LAdescription: "ຂໍ້ມູນວັດຖຸດິບ", input_type: "T3-1",
           column:{
             columnHead:[
                         {id:1, descriptionLA:"ລຳດັບ", inputType:"No"},
@@ -461,12 +484,12 @@ export const form200:any = {
                       ] 
                     } , main_key : "311"
                   },
-        { classified: "sub_head", code: "311D",  descriptionEN: "", descriptionLA: "ມາດຕະການສຳລັບນຳເຂົ້າວັດຖຸດິບຄວບຄຸມ", input_type: "text", main_key : "311" },
-        { classified: "sub_head", code: "311E",  descriptionEN: "", descriptionLA: "ມາດຕະການສຳລັບການຕິດຕາມກວດກາ", input_type: "text", main_key : "311" },
+        { classified: "sub_head", code: "311D", ENdescription:"Measures for importing controlled raw materials", LAdescription: "ມາດຕະການສຳລັບນຳເຂົ້າວັດຖຸດິບຄວບຄຸມ", input_type: "text", main_key : "311" },
+        { classified: "sub_head", code: "311E", ENdescription:"Measures to inspect the import of controlled raw materials", LAdescription: "ມາດຕະການສຳລັບການຕິດຕາມກວດກາ", input_type: "text", main_key : "311" },
       
-        { classified: "title", code: "312",  descriptionEN: "", descriptionLA: "ເຊື້ອໄຟ", input_type: null },
-        { classified: "sub_head", code: "312A",  descriptionEN: "", descriptionLA: "ເຊື້ອໄຟທີ່ນຳໃຊ້ (ຊະນິດ)", input_type: "number", main_key : "312" },
-        { classified: "sub_head", code: "312B",  descriptionEN: "", descriptionLA: "ຂໍ້ມູນການໃຊ້ເຊື້ອໄຟ", input_type: "T3-2", 
+        { classified: "title", code: "312", ENdescription:"Fuel", LAdescription: "ເຊື້ອໄຟ", input_type: null },
+        { classified: "sub_head", code: "312A", ENdescription:"Fuel (Type)", LAdescription: "ເຊື້ອໄຟທີ່ນຳໃຊ້ (ຊະນິດ)", input_type: "number", main_key : "312" },
+        { classified: "sub_head", code: "312B", ENdescription:"Details of Fuel", LAdescription: "ຂໍ້ມູນການໃຊ້ເຊື້ອໄຟ", input_type: "T3-2", 
           column:{
             columnHead:[
                         {id:1, descriptionLA:"ລຳດັບ", inputType:"No"},
@@ -482,20 +505,20 @@ export const form200:any = {
                       ] 
                     }, main_key : "312"
                  },
-        { classified: "sub_head", code: "312C",  descriptionEN: "", descriptionLA: "ຮູບພາບເຊື້ອໄຟ ແລະ ການຈັດເກັບ", input_type: "file-P", main_key : "312" },
+        { classified: "sub_head", code: "312C", ENdescription:"Picture of fuel storage", LAdescription: "ຮູບພາບເຊື້ອໄຟ ແລະ ການຈັດເກັບ", input_type: "file-P", main_key : "312" },
   
-        { classified: "title", code: "313",  descriptionEN: "", descriptionLA: "ສານເຄມີ", input_type: null },
-        { classified: "sub_head", code: "313A",  descriptionEN: "", descriptionLA: "ສານເຄມີທັງໝົດທີ່ນຳໃຊ້ (ຊະນິດ)", input_type: "number", main_key : "313" },
-        { classified: "sub_head", code: "313B",  descriptionEN: "", descriptionLA: "ປະລິມານສານເຄມີທັງໝົດທີ່ນຳໃຊ້ (kg)", input_type: "number", main_key : "313" },
+        { classified: "title", code: "313", ENdescription:"Chemical", LAdescription: "ສານເຄມີ", input_type: null },
+        { classified: "sub_head", code: "313A", ENdescription:"Number of Chemical (Type)", LAdescription: "ສານເຄມີທັງໝົດທີ່ນຳໃຊ້ (ຊະນິດ)", input_type: "number", main_key : "313" },
+        { classified: "sub_head", code: "313B", ENdescription:"Total volume of chemical (kg)", LAdescription: "ປະລິມານສານເຄມີທັງໝົດທີ່ນຳໃຊ້ (kg)", input_type: "number", main_key : "313" },
   
-        { classified: "title", code: "313C",  descriptionEN: "", descriptionLA: "ປະເພດສານເຄມີເປັນພິດອັນຕະລາຍ", input_type: null },
-        { classified: "sub_head", code: "313C1",  descriptionEN: "", descriptionLA: "ສານເຄມີປະເພດ 1 (ຊະນິດ)", input_type: "number", main_key : "313C" },
-        { classified: "sub_head", code: "313C2",  descriptionEN: "", descriptionLA: "ສານເຄມີປະເພດ 2 (ຊະນິດ)", input_type: "number", main_key : "313C" },
-        { classified: "sub_head", code: "313C3",  descriptionEN: "", descriptionLA: "ສານເຄມີປະເພດ 3 (ຊະນິດ)", input_type: "number", main_key : "313C" },
-        { classified: "sub_head", code: "313C4",  descriptionEN: "", descriptionLA: "ສານເຄມີປະເພດ 4 (ຊະນິດ)", input_type: "number", main_key : "313C" },
-        { classified: "sub_head", code: "313C5",  descriptionEN: "", descriptionLA: "ສານເຄມີປະເພດອື່ນໆ (ຊະນິດ)", input_type: "number", main_key : "313C" },
+        { classified: "title", code: "313C", ENdescription:"Chemical category", LAdescription: "ປະເພດສານເຄມີເປັນພິດອັນຕະລາຍ", input_type: null },
+        { classified: "sub_head", code: "313C1", ENdescription:"1st Category (Type)", LAdescription: "ສານເຄມີປະເພດ 1 (ຊະນິດ)", input_type: "number", main_key : "313C" },
+        { classified: "sub_head", code: "313C2", ENdescription:"2nd Category (Type)", LAdescription: "ສານເຄມີປະເພດ 2 (ຊະນິດ)", input_type: "number", main_key : "313C" },
+        { classified: "sub_head", code: "313C3", ENdescription:"3rd Category (Type)", LAdescription: "ສານເຄມີປະເພດ 3 (ຊະນິດ)", input_type: "number", main_key : "313C" },
+        { classified: "sub_head", code: "313C4", ENdescription:"4th Category (Type)", LAdescription: "ສານເຄມີປະເພດ 4 (ຊະນິດ)", input_type: "number", main_key : "313C" },
+        { classified: "sub_head", code: "313C5", ENdescription:"Other (Type)", LAdescription: "ສານເຄມີປະເພດອື່ນໆ (ຊະນິດ)", input_type: "number", main_key : "313C" },
   
-        { classified: "sub_head", code: "313D",  descriptionEN: "", descriptionLA: "ສານເຄມີ ແລະ ການນຳໃຊ້", input_type: "T3-3", 
+        { classified: "sub_head", code: "313D", ENdescription:"Details of Chemical", LAdescription: "ສານເຄມີ ແລະ ການນຳໃຊ້", input_type: "T3-3", 
           column:{
             columnHead:[
                         {id:1, descriptionLA:"ລຳດັບ", inputType:"No"},
@@ -511,8 +534,8 @@ export const form200:any = {
                       ] 
                     }, main_key : "313"
                    },
-        { classified: "sub_head", code: "313E",  descriptionEN: "", descriptionLA: "ຮູບພາບສານເຄມີ", input_type: "file-P", main_key : "313" },
-        { classified: "sub_head", code: "313F",  descriptionEN: "", descriptionLA: "ຂໍ້ມູນຄວາມເປັນພິດອັນຕະລາຍຂອງສານເຄມີ", input_type: "T3-4", 
+        { classified: "sub_head", code: "313E", ENdescription:"Picture of chemical", LAdescription: "ຮູບພາບສານເຄມີ", input_type: "file-P", main_key : "313" },
+        { classified: "sub_head", code: "313F", ENdescription:"Chemical toxicity information", LAdescription: "ຂໍ້ມູນຄວາມເປັນພິດອັນຕະລາຍຂອງສານເຄມີ", input_type: "T3-4", 
           column:{
             columnHead:[
                         {id:1, descriptionLA:"ລຳດັບ", inputType:"No"},
@@ -530,12 +553,12 @@ export const form200:any = {
   
       ],
       form320: [
-        { classified: "heading", code: "320",  descriptionEN: "", descriptionLA: "ຜະລິດຕະພັນ", input_type: null },
-        { classified: "title", code: "321",  descriptionEN: "", descriptionLA: "ຜະລິດຕະພັນຫຼັກ", input_type: null },
-        { classified: "sub_head", code: "321A",  descriptionEN: "", descriptionLA: "ຜະລິດຕະພັນ (ຊະນິດ)", input_type: "number", main_key : "321" },
-        { classified: "sub_head", code: "321B",  descriptionEN: "", descriptionLA: "ກຳລັງການຜະລິດປົກກະຕິຕໍ່ປີ", input_type: "text", main_key : "321" },
-        { classified: "sub_head", code: "321C",  descriptionEN: "", descriptionLA: "ກຳລັງການຜະລິດສູງສຸດຕໍ່ປີ", input_type: "text", main_key : "321" },
-        { classified: "sub_head", code: "321D",  descriptionEN: "", descriptionLA: "ຂໍ້ມູນຜະລິດຕະພັນ", input_type: "T3-5", 
+        { classified: "heading", code: "320", ENdescription:"Product and by-product", LAdescription: "ຜະລິດຕະພັນ", input_type: null },
+        { classified: "title", code: "321", ENdescription:"Product", LAdescription: "ຜະລິດຕະພັນຫຼັກ", input_type: null },
+        { classified: "sub_head", code: "321A", ENdescription:"product (Type)", LAdescription: "ຜະລິດຕະພັນ (ຊະນິດ)", input_type: "number", main_key : "321" },
+        { classified: "sub_head", code: "321B", ENdescription:"Production volume per year", LAdescription: "ກຳລັງການຜະລິດປົກກະຕິຕໍ່ປີ", input_type: "text", main_key : "321" },
+        { classified: "sub_head", code: "321C", ENdescription:"maximum volume per year", LAdescription: "ກຳລັງການຜະລິດສູງສຸດຕໍ່ປີ", input_type: "text", main_key : "321" },
+        { classified: "sub_head", code: "321D", ENdescription:"List of Product", LAdescription: "ຂໍ້ມູນຜະລິດຕະພັນ", input_type: "T3-5", 
           column:{
             columnHead:[
                         {id:1, descriptionLA:"ລຳດັບ", inputType:"No"},
@@ -549,11 +572,11 @@ export const form200:any = {
                         {id:9, descriptionLA:"HS Code", inputType:"text-area" },
                       ] 
                     }, main_key : "321" },
-        { classified: "sub_head", code: "321E",  descriptionEN: "", descriptionLA: "ຮູບພາບຜະລິດຕະພັນ", input_type: "file-P", main_key : "321" },
+        { classified: "sub_head", code: "321E", ENdescription:"Picture of Product", LAdescription: "ຮູບພາບຜະລິດຕະພັນ", input_type: "file-P", main_key : "321" },
   
-        { classified: "title", code: "322",  descriptionEN: "", descriptionLA: "ຜະລິດຕະພັນຂ້າງຄຽງ", input_type: null },
-        { classified: "sub_head", code: "322A",  descriptionEN: "", descriptionLA: "ຜະລິດຕະພັນຂ້າງຄຽງ (ຊະນິດ)", input_type: "text", main_key : "322" },
-        { classified: "sub_head", code: "322B",  descriptionEN: "", descriptionLA: "ຂໍ້ມູນຜະລິດຕະພັນຂ້າງຄຽງ", input_type: "T3-6", 
+        { classified: "title", code: "322", ENdescription:"By-Product", LAdescription: "ຜະລິດຕະພັນຂ້າງຄຽງ", input_type: null },
+        { classified: "sub_head", code: "322A", ENdescription:"by-product (Type)", LAdescription: "ຜະລິດຕະພັນຂ້າງຄຽງ (ຊະນິດ)", input_type: "text", main_key : "322" },
+        { classified: "sub_head", code: "322B", ENdescription:"List of by-product", LAdescription: "ຂໍ້ມູນຜະລິດຕະພັນຂ້າງຄຽງ", input_type: "T3-6", 
           column:{
             columnHead:[
                         {id:1, descriptionLA:"ລຳດັບ", inputType:"No"},
@@ -564,13 +587,13 @@ export const form200:any = {
                         {id:6, descriptionLA:"ສະຖານທີ່ເກັບ", inputType:"text-area" },
                       ] 
                     }, main_key : "322" },
-        { classified: "sub_head", code: "322C",  descriptionEN: "", descriptionLA: "ຮູບພາບຜະລິດຕະພັນຂ້າງຄຽງ", input_type: "file-P", main_key : "322" },
+        { classified: "sub_head", code: "322C", ENdescription:"Picture of by-Product", LAdescription: "ຮູບພາບຜະລິດຕະພັນຂ້າງຄຽງ", input_type: "file-P", main_key : "322" },
       ],
       form330: [
-        { classified: "heading", code: "330",  descriptionEN: "", descriptionLA: "ການນຳໃຊ້ເຄື່ອງຈັກ, ແຮງງານ, ຊັບພະຍາກອນນ້ຳ ແລະ ພະລັງງານໄຟຟ້າ", input_type: null },
-        { classified: "title", code: "331",  descriptionEN: "", descriptionLA: "ການນຳໃຊ້ເຄື່ອງຈັກຫຼັກໃນການຜະລິດ", input_type: null },
-        { classified: "sub_head", code: "331A",  descriptionEN: "", descriptionLA: "ກຳລັງເຄື່ອງຈັກໃນໂຮງງານ", input_type: "text", main_key : "331" },
-        { classified: "sub_head", code: "331B",  descriptionEN: "", descriptionLA: "ຂໍ້ມູນເຄື່ອງຈັກໃນໂຮງງານ", input_type: "T3-7",
+        { classified: "heading", code: "330", ENdescription:"Machinery, Personnel", LAdescription: "ການນຳໃຊ້ເຄື່ອງຈັກ, ແຮງງານ, ຊັບພະຍາກອນນ້ຳ ແລະ ພະລັງງານໄຟຟ້າ", input_type: null },
+        { classified: "title", code: "331", ENdescription:"Machinery", LAdescription: "ການນຳໃຊ້ເຄື່ອງຈັກຫຼັກໃນການຜະລິດ", input_type: null },
+        { classified: "sub_head", code: "331A", ENdescription:"Total Machinery Capacity", LAdescription: "ກຳລັງເຄື່ອງຈັກໃນໂຮງງານ", input_type: "text", main_key : "331" },
+        { classified: "sub_head", code: "331B", ENdescription:"List of Mechinery in order of the Production Process", LAdescription: "ຂໍ້ມູນເຄື່ອງຈັກໃນໂຮງງານ", input_type: "T3-7",
            column:{
             columnHead:[
                         {id:1, descriptionLA:"ລຳດັບ", inputType:"No"},
@@ -582,13 +605,13 @@ export const form200:any = {
                         {id:7, descriptionLA:"ແຮງມ້າລວມ", inputType:"text-area" },
                       ] 
                     }, main_key : "331" },
-        { classified: "sub_head", code: "331C",  descriptionEN: "", descriptionLA: "ຮູບເຄື່ອງຈັກ", input_type: "file", main_key : "331" },
-        { classified: "sub_head", code: "331D",  descriptionEN: "", descriptionLA: "ແຜນຜັງຕິດຕັ້ງເຄື່ອງຈັກ", input_type: "file", main_key : "331" },
-        { classified: "sub_head", code: "331E",  descriptionEN: "", descriptionLA: "ແຜນຜັງຕິດຕັ້ງເຄື່ອງຍົກນ້ຳໜັກ, ແຜນຜັງຕິດຕັ້ງເຕົາອົບ ແລະ ເຕົາສະຕີມ", input_type: "file", main_key : "331" },
+        { classified: "sub_head", code: "331C", ENdescription:"Picture of Mechinerty", LAdescription: "ຮູບເຄື່ອງຈັກ", input_type: "file", main_key : "331" },
+        { classified: "sub_head", code: "331D", ENdescription:"Layout plan, Site plan, Mechinery Installation ", LAdescription: "ແຜນຜັງຕິດຕັ້ງເຄື່ອງຈັກ", input_type: "file", main_key : "331" },
+        { classified: "sub_head", code: "331E", ENdescription:"Layout plan, Site plan, Crane, Oven and Steam boiler Installation ", LAdescription: "ແຜນຜັງຕິດຕັ້ງເຄື່ອງຍົກນ້ຳໜັກ, ແຜນຜັງຕິດຕັ້ງເຕົາອົບ ແລະ ເຕົາສະຕີມ", input_type: "file", main_key : "331" },
       
-        { classified: "title", code: "332",  descriptionEN: "", descriptionLA: "ການນຳໃຊ້ແຮງງານ", input_type: null },
-        { classified: "sub_head", code: "332A",  descriptionEN: "", descriptionLA: "ຈຳນວນຜຽນ (ຜຽນ)", input_type: "number", main_key : "332" },
-        { classified: "sub_head", code: "332B",  descriptionEN: "", descriptionLA: "ຂໍ້ມູນການເຮັດວຽກ", input_type: "T3-8", 
+        { classified: "title", code: "332", ENdescription:"Labor", LAdescription: "ການນຳໃຊ້ແຮງງານ", input_type: null },
+        { classified: "sub_head", code: "332A", ENdescription:"Number of shift(s)", LAdescription: "ຈຳນວນຜຽນ (ຜຽນ)", input_type: "number", main_key : "332" },
+        { classified: "sub_head", code: "332B", ENdescription:"Work Hours", LAdescription: "ຂໍ້ມູນການເຮັດວຽກ", input_type: "T3-8", 
           column:{
             columnHead:[
                         {id:1, descriptionLA:"ຜຽນ", inputType:"text-area"},
@@ -598,42 +621,42 @@ export const form200:any = {
                         {id:5, descriptionLA:"ໝາຍເຫດ", inputType:"text-area" },
                       ] 
                     }, main_key : "332"},
-        { classified: "sub_head", code: "332C",  descriptionEN: "", descriptionLA: "ຈຳນວນຜູ້ອອກແຮງງານລວມ (ຄົນ)", input_type: "number", main_key : "332" },
+        { classified: "sub_head", code: "332C", ENdescription:"Total Labor (Person(s))", LAdescription: "ຈຳນວນຜູ້ອອກແຮງງານລວມ (ຄົນ)", input_type: "number", main_key : "332" },
       
-        { classified: "title", code: "332D",  descriptionEN: "", descriptionLA: "ປະເພດແຮງງານ", input_type: null },
-        { classified: "sub_head", code: "332D1",  descriptionEN: "", descriptionLA: "ພະນັກງານ-ວິຊາການ-ຊ່ຽວຊານ (ຄົນ)", input_type: "number", main_key : "332D" },
-        { classified: "sub_head", code: "332D2",  descriptionEN: "", descriptionLA: "ແຮງງານຜະລິດ (ຄົນ)", input_type: "number", main_key : "332D" },
+        { classified: "title", code: "332D", ENdescription:"Type of Labor", LAdescription: "ປະເພດແຮງງານ", input_type: null },
+        { classified: "sub_head", code: "332D1", ENdescription:"Officer, Techicians, experts (Person(s)", LAdescription: "ພະນັກງານ-ວິຊາການ-ຊ່ຽວຊານ (ຄົນ)", input_type: "number", main_key : "332D" },
+        { classified: "sub_head", code: "332D2", ENdescription:"Worker (Person(s)", LAdescription: "ແຮງງານຜະລິດ (ຄົນ)", input_type: "number", main_key : "332D" },
   
-        { classified: "title", code: "332E",  descriptionEN: "", descriptionLA: "ເພດ", input_type: null },
-        { classified: "sub_head", code: "332E1",  descriptionEN: "", descriptionLA: "ຜູ້ຊາຍ (ຄົນ)", input_type: "number", main_key : "332E" },
-        { classified: "sub_head", code: "332E2",  descriptionEN: "", descriptionLA: "ຜູ້ຍິງ (ຄົນ)", input_type: "number", main_key : "332E" },
+        { classified: "title", code: "332E", ENdescription:"Gender", LAdescription: "ເພດ", input_type: null },
+        { classified: "sub_head", code: "332E1", ENdescription:"male", LAdescription: "ຜູ້ຊາຍ (ຄົນ)", input_type: "number", main_key : "332E" },
+        { classified: "sub_head", code: "332E2", ENdescription:"female", LAdescription: "ຜູ້ຍິງ (ຄົນ)", input_type: "number", main_key : "332E" },
   
-        { classified: "title", code: "332F",  descriptionEN: "", descriptionLA: "ກຸ່ມແຮງງານ", input_type: null },
-        { classified: "sub_head", code: "332F1",  descriptionEN: "", descriptionLA: "ຜູ້ອອກແຮງງານພາຍໃນປະເທດ (ຄົນ)", input_type: "number", main_key : "332F" },
-        { classified: "sub_head", code: "332F2",  descriptionEN: "", descriptionLA: "ຜູ້ອອກແຮງງານຕ່າງປະເທດ (ຄົນ)", input_type: "number", main_key : "332F" },
+        { classified: "title", code: "332F", ENdescription:"Group of Labor", LAdescription: "ກຸ່ມແຮງງານ", input_type: null },
+        { classified: "sub_head", code: "332F1", ENdescription:"National (Person(s)", LAdescription: "ຜູ້ອອກແຮງງານພາຍໃນປະເທດ (ຄົນ)", input_type: "number", main_key : "332F" },
+        { classified: "sub_head", code: "332F2", ENdescription:"Foreign (Person(s)", LAdescription: "ຜູ້ອອກແຮງງານຕ່າງປະເທດ (ຄົນ)", input_type: "number", main_key : "332F" },
   
-        { classified: "title", code: "332G",  descriptionEN: "", descriptionLA: "ການໃຊ້ຜູ້ຮັບເໝົາ (ບໍ່ປະຈຳ)", input_type: null },
-        { classified: "sub_head", code: "332G1",  descriptionEN: "", descriptionLA: "ການນຳໃຊ້", input_type: "text", main_key : "332G" },
-        { classified: "sub_head", code: "332G2",  descriptionEN: "", descriptionLA: "ຄວາມຖີ່ໃນການໃຊ້", input_type: "text", main_key : "332G" },
-        { classified: "sub_head", code: "332G3",  descriptionEN: "", descriptionLA: "ຈຳນວນ (ຄົນ)", input_type: "number", main_key : "332G" },
+        { classified: "title", code: "332G", ENdescription:"Contractor", LAdescription: "ການໃຊ້ຜູ້ຮັບເໝົາ (ບໍ່ປະຈຳ)", input_type: null },
+        { classified: "sub_head", code: "332G1", ENdescription:"Contractor services", LAdescription: "ການນຳໃຊ້", input_type: "text", main_key : "332G" },
+        { classified: "sub_head", code: "332G2", ENdescription:"Frequency of using the service", LAdescription: "ຄວາມຖີ່ໃນການໃຊ້", input_type: "text", main_key : "332G" },
+        { classified: "sub_head", code: "332G3", ENdescription:"Contractor (Person(s)", LAdescription: "ຈຳນວນ (ຄົນ)", input_type: "number", main_key : "332G" },
   
-        { classified: "title", code: "333",  descriptionEN: "", descriptionLA: "ການນຳໃຊ້ນ້ຳ ແລະ ການກັກເກັບ", input_type: null },
-        { classified: "sub_head", code: "333A",  descriptionEN: "", descriptionLA: "ປະລິມານການນຳໃຊ້ນ້ຳທັງໝົດ (ແມັດກ້ອນ)", input_type: "number", main_key : "333" },
-        { classified: "sub_head", code: "333B",  descriptionEN: "", descriptionLA: "ການນຳໃຊ້ນ້ຳປະປາ", input_type: "text", main_key : "333" },
-        { classified: "sub_head", code: "333B1",  descriptionEN: "", descriptionLA: "ປະລິມານນຳໃຊ້ (ແມັດກ້ອນ)", input_type: "number", main_key : "333" },
-        { classified: "sub_head", code: "333B2",  descriptionEN: "", descriptionLA: "ຂະໜາດມິເຕີ້", input_type: "text", main_key : "333" },
-        { classified: "sub_head", code: "333B3",  descriptionEN: "", descriptionLA: "ຂະໜາດທໍ່", input_type: "text", main_key : "333" },
+        { classified: "title", code: "333", ENdescription:"Water usage and storage", LAdescription: "ການນຳໃຊ້ນ້ຳ ແລະ ການກັກເກັບ", input_type: null },
+        { classified: "sub_head", code: "333A", ENdescription:"Total water usage (Cubic meter)", LAdescription: "ປະລິມານການນຳໃຊ້ນ້ຳທັງໝົດ (ແມັດກ້ອນ)", input_type: "number", main_key : "333" },
+        { classified: "sub_head", code: "333B", ENdescription:"tap water use", LAdescription: "ການນຳໃຊ້ນ້ຳປະປາ", input_type: "text", main_key : "333" },
+        { classified: "sub_head", code: "333B1", ENdescription:"tap water usage (Cubic meter)", LAdescription: "ປະລິມານນຳໃຊ້ (ແມັດກ້ອນ)", input_type: "number", main_key : "333" },
+        { classified: "sub_head", code: "333B2", ENdescription:"Water meter size", LAdescription: "ຂະໜາດມິເຕີ້", input_type: "text", main_key : "333" },
+        { classified: "sub_head", code: "333B3", ENdescription:"Water pipe size", LAdescription: "ຂະໜາດທໍ່", input_type: "text", main_key : "333" },
         
-        { classified: "title", code: "333C",  descriptionEN: "", descriptionLA: "ການນຳໃຊ້ນ້ຳໜ້າດິນ", input_type: null },
-        { classified: "sub_head", code: "333C1",  descriptionEN: "", descriptionLA: "ຂະໜາດການນຳໃຊ້ນ້ຳ", input_type: "choice", options: sizeOptions, main_key : "333C" },
-        { classified: "sub_head", code: "333C2",  descriptionEN: "", descriptionLA: "ປະລິມານການໃຊ້ (ແມັດກ້ອນ)", input_type: "number", main_key : "333C" },
-        { classified: "sub_head", code: "333C3",  descriptionEN: "", descriptionLA: "ແຫຼ່ງນ້ຳໜ້າດິນທີ່ນຳໃຊ້", input_type: "text", main_key : "333C" },
+        { classified: "title", code: "333C", ENdescription:"Surface water use", LAdescription: "ການນຳໃຊ້ນ້ຳໜ້າດິນ", input_type: null },
+        { classified: "sub_head", code: "333C1", ENdescription:"Surface water use scale", LAdescription: "ຂະໜາດການນຳໃຊ້ນ້ຳ", input_type: "choice", options: sizeOptions, main_key : "333C" },
+        { classified: "sub_head", code: "333C2", ENdescription:"Surface water usage (Cubic meter)", LAdescription: "ປະລິມານການໃຊ້ (ແມັດກ້ອນ)", input_type: "number", main_key : "333C" },
+        { classified: "sub_head", code: "333C3", ENdescription:"Surface water source", LAdescription: "ແຫຼ່ງນ້ຳໜ້າດິນທີ່ນຳໃຊ້", input_type: "text", main_key : "333C" },
         
-        { classified: "title", code: "333D",  descriptionEN: "", descriptionLA: "ການນຳໃຊ້ນໍ້າໃຕ້ດິນ", input_type: null },
-        { classified: "sub_head", code: "333D1",  descriptionEN: "", descriptionLA: "ຂະໜາດການນຳໃຊ້ນ້ຳໃຕ້ດິນ", input_type: "choice", options: sizeOptions, main_key : "333D" },
-        { classified: "sub_head", code: "333D2",  descriptionEN: "", descriptionLA: "ປະລິມານການໃຊ້ (ແມັດກ້ອນ)", input_type: "number", main_key : "333D" },
-        { classified: "sub_head", code: "333D3",  descriptionEN: "", descriptionLA: "ຈຳນວນບໍ່ນ້ຳບາດານ/ບໍ່ນ້ຳສ້າງ (ຈຸດ)", input_type: "number", main_key : "333D" },
-        { classified: "sub_head", code: "333D4",  descriptionEN: "", descriptionLA: "ຂໍ້ມູນບໍ່ນ້ຳບາດານ/ບໍ່ນ້ຳສ້າງ", input_type: "T3-9",
+        { classified: "title", code: "333D", ENdescription:"Groundwater use", LAdescription: "ການນຳໃຊ້ນໍ້າໃຕ້ດິນ", input_type: null },
+        { classified: "sub_head", code: "333D1", ENdescription:"Groundwater use scale", LAdescription: "ຂະໜາດການນຳໃຊ້ນ້ຳໃຕ້ດິນ", input_type: "choice", options: sizeOptions, main_key : "333D" },
+        { classified: "sub_head", code: "333D2", ENdescription:"Groundwater usage (Cubic meter)", LAdescription: "ປະລິມານການໃຊ້ (ແມັດກ້ອນ)", input_type: "number", main_key : "333D" },
+        { classified: "sub_head", code: "333D3", ENdescription:"Artesian well (point)", LAdescription: "ຈຳນວນບໍ່ນ້ຳບາດານ/ບໍ່ນ້ຳສ້າງ (ຈຸດ)", input_type: "number", main_key : "333D" },
+        { classified: "sub_head", code: "333D4", ENdescription:"Artesian well Detials", LAdescription: "ຂໍ້ມູນບໍ່ນ້ຳບາດານ/ບໍ່ນ້ຳສ້າງ", input_type: "T3-9",
            column:{
             columnHead:[
                         {id:1, descriptionLA:"ບໍນ້ຳບາດານ/ນ້ຳສ້າງ ເລກທີ", inputType:"text-area"},
@@ -643,14 +666,14 @@ export const form200:any = {
                       ] 
                     }, main_key : "333D"
                   },
-        { classified: "sub_head", code: "333D5",  descriptionEN: "", descriptionLA: "ແຜນຜັງບໍ່ນ້ຳບາດານ/ບໍ່ນ້ຳສ້າງ", input_type: "file", main_key : "333D" },
-        { classified: "sub_head", code: "333D6",  descriptionEN: "", descriptionLA: "ໝໍ້ວັດປະລິມານການນຳໃຊ້ນ້ຳໃຕ້ດິນ", input_type: "choice", options: haveOrNoOptions, main_key : "333D" },
+        { classified: "sub_head", code: "333D5", ENdescription:"Layout of artesian well", LAdescription: "ແຜນຜັງບໍ່ນ້ຳບາດານ/ບໍ່ນ້ຳສ້າງ", input_type: "file", main_key : "333D" },
+        { classified: "sub_head", code: "333D6", ENdescription:"underground water meter", LAdescription: "ໝໍ້ວັດປະລິມານການນຳໃຊ້ນ້ຳໃຕ້ດິນ", input_type: "choice", options: haveOrNoOptions, main_key : "333D" },
         
-        { classified: "title", code: "333E",  descriptionEN: "", descriptionLA: "ການນຳໃຊ້ນ້ຳຄືນໃໝ່", input_type: null },
-        { classified: "sub_head", code: "333E1",  descriptionEN: "", descriptionLA: "ການນຳໃຊ້ນ້ຳຄືນໃໝ່", input_type: "choice", options: haveOrNoOptions, main_key : "333E" },
-        { classified: "sub_head", code: "333E2",  descriptionEN: "", descriptionLA: "ນຳໃຊ້ໃນຂະບວນການ", input_type: "text", main_key : "333E" },
+        { classified: "title", code: "333E", ENdescription:"wastewater reuse", LAdescription: "ການນຳໃຊ້ນ້ຳຄືນໃໝ່", input_type: null },
+        { classified: "sub_head", code: "333E1", ENdescription:"wastewater reuse", LAdescription: "ການນຳໃຊ້ນ້ຳຄືນໃໝ່", input_type: "choice", options: haveOrNoOptions, main_key : "333E" },
+        { classified: "sub_head", code: "333E2", ENdescription:"Used for", LAdescription: "ນຳໃຊ້ໃນຂະບວນການ", input_type: "text", main_key : "333E" },
   
-        { classified: "sub_head", code: "333F",  descriptionEN: "", descriptionLA: "ຂໍ້ມູນການໃຊ້ນ້ຳເຂົ້າໃນການອຸປະໂພກ", input_type: "T3-10", 
+        { classified: "sub_head", code: "333F", ENdescription:"Using water for consumption", LAdescription: "ຂໍ້ມູນການໃຊ້ນ້ຳເຂົ້າໃນການອຸປະໂພກ", input_type: "T3-10", 
           column:{
             columnHead:[
                         {id:1, descriptionLA:"ລຳດັບ", inputType:"No"},
@@ -660,7 +683,7 @@ export const form200:any = {
                       ] 
                     }, main_key : "333E"
                   },
-        { classified: "sub_head", code: "333G",  descriptionEN: "", descriptionLA: "ຂໍ້ມູນການນຳໃຊ້ນ້ຳເຂົ້າໃນການຜະລິດ", input_type: "T3-11",
+        { classified: "sub_head", code: "333G", ENdescription:"Using water for Production", LAdescription: "ຂໍ້ມູນການນຳໃຊ້ນ້ຳເຂົ້າໃນການຜະລິດ", input_type: "T3-11",
            column:{
             columnHead:[
                         {id:1, descriptionLA:"ລຳດັບ", inputType:"No"},
@@ -670,9 +693,9 @@ export const form200:any = {
                       ] 
                     }, main_key : "333E"
                   },
-        { classified: "sub_head", code: "333H",  descriptionEN: "", descriptionLA: "ການກັກເກັບ (ຈຸດ)", input_type: "number", main_key : "333E" },
-        { classified: "sub_head", code: "333I",  descriptionEN: "", descriptionLA: "ປະລິມານກັກເກັບລວມ (ແມັດກ້ອນ)", input_type: "number", main_key : "333E" },
-        { classified: "sub_head", code: "333J",  descriptionEN: "", descriptionLA: "ຂໍ້ມູນການກັກເກັບນ້ຳ", input_type: "T3-12", 
+        { classified: "sub_head", code: "333H", ENdescription:"Water storage and water retention (Point)", LAdescription: "ການກັກເກັບ (ຈຸດ)", input_type: "number", main_key : "333E" },
+        { classified: "sub_head", code: "333I", ENdescription:"Storage volunm (Cubic meter)", LAdescription: "ປະລິມານກັກເກັບລວມ (ແມັດກ້ອນ)", input_type: "number", main_key : "333E" },
+        { classified: "sub_head", code: "333J", ENdescription:"Water storage and water retention Details", LAdescription: "ຂໍ້ມູນການກັກເກັບນ້ຳ", input_type: "T3-12", 
           column:{
             columnHead:[
                         {id:1, descriptionLA:"ລຳດັບ", inputType:"No"},
@@ -684,21 +707,21 @@ export const form200:any = {
                     }, main_key : "333E"
                   },
   
-        { classified: "title", code: "334",  descriptionEN: "", descriptionLA: "ການນຳໃຊ້ໄຟຟ້າ", input_type: null },
-        { classified: "sub_head", code: "334A",  descriptionEN: "", descriptionLA: "ຂະໜາດຂ່າຍສານໄຟຟ້າ", input_type: "text", main_key : "334" },
-        { classified: "sub_head", code: "334B",  descriptionEN: "", descriptionLA: "ຈຳນວນໝໍ້ແປງ ແລະ ຂະໜາດ (KVA)", input_type: "text", main_key : "334" },
-        { classified: "sub_head", code: "334C",  descriptionEN: "", descriptionLA: "ຂະໜາດໝໍ້ແປງລວມ (KVA)", input_type: "number", main_key : "334" },
-        { classified: "sub_head", code: "334D",  descriptionEN: "", descriptionLA: "ພະລັງງານໄຟຟ້າສະເລ່ຍ (Kw/ມື້)", input_type: "number", main_key : "334" },
-        { classified: "sub_head", code: "334E",  descriptionEN: "", descriptionLA: "ໄຟຟ້າສຳຮອງ", input_type: "text", main_key : "334" },
-        { classified: "sub_head", code: "334F",  descriptionEN: "", descriptionLA: "ແຜນຜັງຕິດຕັ້ງລະບົບໄຟຟ້າ", input_type: "file", main_key : "334" },
+        { classified: "title", code: "334", ENdescription:"Electricity usage", LAdescription: "ການນຳໃຊ້ໄຟຟ້າ", input_type: null },
+        { classified: "sub_head", code: "334A", ENdescription:"Transmission line voltage", LAdescription: "ຂະໜາດຂ່າຍສານໄຟຟ້າ", input_type: "text", main_key : "334" },
+        { classified: "sub_head", code: "334B", ENdescription:"Number and size (KVA) of Power transformer", LAdescription: "ຈຳນວນໝໍ້ແປງ ແລະ ຂະໜາດ (KVA)", input_type: "text", main_key : "334" },
+        { classified: "sub_head", code: "334C", ENdescription:"Total rated power", LAdescription: "ຂະໜາດໝໍ້ແປງລວມ (KVA)", input_type: "number", main_key : "334" },
+        { classified: "sub_head", code: "334D", ENdescription:"", LAdescription: "ພະລັງງານໄຟຟ້າສະເລ່ຍ (Kw/ມື້)", input_type: "number", main_key : "334" },
+        { classified: "sub_head", code: "334E", ENdescription:"", LAdescription: "ໄຟຟ້າສຳຮອງ", input_type: "text", main_key : "334" },
+        { classified: "sub_head", code: "334F", ENdescription:"", LAdescription: "ແຜນຜັງຕິດຕັ້ງລະບົບໄຟຟ້າ", input_type: "file", main_key : "334" },
       ],
       form340: [
-        { classified: "heading", code: "340",  descriptionEN: "", descriptionLA: "ຂະບວນການຜະລິດຫຼັກ ແລະ ສະໜັບສະໜຸນ", input_type: null },
-        { classified: "title", code: "341",  descriptionEN: "", descriptionLA: "ຫ້ອງເກັບສານເຄມີ", input_type: null },
-        { classified: "sub_head", code: "341A",  descriptionEN: "", descriptionLA: "ຈຳນວນສາຍ, ຊຸດການຜະລິດ", input_type: "number", main_key : "341" },
-        { classified: "sub_head", code: "341B",  descriptionEN: "", descriptionLA: "ຮູບແບບການຜະລິດ", input_type: "choice", options: processOptions, main_key : "341" },
-        { classified: "sub_head", code: "341C",  descriptionEN: "", descriptionLA: "ແຜນວາດຂະບວນການຜະລິດ (Workflow)", input_type: "file", main_key : "341" },
-        { classified: "sub_head", code: "341D",  descriptionEN: "", descriptionLA: "ຂໍ້ມູນຂະບວນການຜະລິດ", input_type: "T3-13",
+        { classified: "heading", code: "340", ENdescription:"Details on Production and activities", LAdescription: "ຂະບວນການຜະລິດຫຼັກ ແລະ ສະໜັບສະໜຸນ", input_type: null },
+        { classified: "title", code: "341", ENdescription:"Details on Main Production", LAdescription: "ຂະບວນການຜະລິດຫຼັກ", input_type: null },
+        { classified: "sub_head", code: "341A", ENdescription:"Number of line production", LAdescription: "ຈຳນວນສາຍ, ຊຸດການຜະລິດ", input_type: "number", main_key : "341" },
+        { classified: "sub_head", code: "341B", ENdescription:"type of production", LAdescription: "ຮູບແບບການຜະລິດ", input_type: "choice", options: processOptions, main_key : "341" },
+        { classified: "sub_head", code: "341C", ENdescription:"Production Workflow", LAdescription: "ແຜນວາດຂະບວນການຜະລິດ (Workflow)", input_type: "file", main_key : "341" },
+        { classified: "sub_head", code: "341D", ENdescription:"Details on Production", LAdescription: "ຂໍ້ມູນຂະບວນການຜະລິດ", input_type: "T3-13",
            column:{
             columnHead:[
                         {id:1, descriptionLA:"ລຳດັບ", inputType:"No"},
@@ -709,30 +732,30 @@ export const form200:any = {
                       ] 
                     }, main_key : "341"
                    },
-        { classified: "sub_head", code: "341E",  descriptionEN: "", descriptionLA: "ຮູບພາບຂະບວນການຜະລິດ", input_type: "file", main_key : "341" },
+        { classified: "sub_head", code: "341E", ENdescription:"Picture of production", LAdescription: "ຮູບພາບຂະບວນການຜະລິດ", input_type: "file", main_key : "341" },
   
-        { classified: "title", code: "342",  descriptionEN: "", descriptionLA: "ຂະບວນການສະໜັບສະໜຸນ ແລະ ກິດຈະກຳທີ່ເຮັດໃຫ້ເກີດສິ່ງເສດເຫຼືອ ແລະ ມົນລະພິດສິ່ງແວດລ້ອມ", input_type: null },
-        { classified: "sub_head", code: "342A",  descriptionEN: "", descriptionLA: "ໜ່ວຍສ້ອມແປງ ແລະ ບຳລຸງຮັກສາ", input_type: "text", main_key : "342" },
-        { classified: "sub_head", code: "342B",  descriptionEN: "", descriptionLA: "ລະບົບຜະລິດໄຟຟ້າ", input_type: "text", main_key : "342" },
-        { classified: "sub_head", code: "342C",  descriptionEN: "", descriptionLA: "ລະບົບປັບປຸງຄຸນນະພາບນ້ຳ", input_type: "text", main_key : "342" },
-        { classified: "sub_head", code: "342D",  descriptionEN: "", descriptionLA: "ໝໍ້ຕົ້ມນ້ຳ (Boiler)", input_type: "text", main_key : "342" },
-        { classified: "sub_head", code: "342E",  descriptionEN: "", descriptionLA: "ຫໍຫຼໍ່ເຢັນ (Cooling Tower) ", input_type: "text", main_key : "342" },
-        { classified: "sub_head", code: "342F",  descriptionEN: "", descriptionLA: "ການກຽມວັດຖຸດິບ ແລະ ປະສົມສານເຄມີ", input_type: "text", main_key : "342" },
-        { classified: "sub_head", code: "342G",  descriptionEN: "", descriptionLA: "ການອະນາໄມ-ລ້າງທຳຄວາມສະອາດພື້ນທີ່ການຜະລິດ ແລະ ອື່ນໆ", input_type: "text", main_key : "342" },
-        { classified: "sub_head", code: "342H",  descriptionEN: "", descriptionLA: "ຫ້ອງປະຕິບັດການວິເຄາະ", input_type: "text", main_key : "342" },
-        { classified: "sub_head", code: "342I",  descriptionEN: "", descriptionLA: "ອື່ນໆ", input_type: "text", main_key : "342" },
+        { classified: "title", code: "342", ENdescription:"Process utility system", LAdescription: "ຂະບວນການສະໜັບສະໜຸນ ແລະ ກິດຈະກຳທີ່ເຮັດໃຫ້ເກີດສິ່ງເສດເຫຼືອ ແລະ ມົນລະພິດສິ່ງແວດລ້ອມ", input_type: null },
+        { classified: "sub_head", code: "342A", ENdescription:"Maintenance section", LAdescription: "ໜ່ວຍສ້ອມແປງ ແລະ ບຳລຸງຮັກສາ", input_type: "text", main_key : "342" },
+        { classified: "sub_head", code: "342B", ENdescription:"Electricity generation system", LAdescription: "ລະບົບຜະລິດໄຟຟ້າ", input_type: "text", main_key : "342" },
+        { classified: "sub_head", code: "342C", ENdescription:"Water Production system", LAdescription: "ລະບົບປັບປຸງຄຸນນະພາບນ້ຳ", input_type: "text", main_key : "342" },
+        { classified: "sub_head", code: "342D", ENdescription:"Boiler", LAdescription: "ໝໍ້ຕົ້ມນ້ຳ (Boiler)", input_type: "text", main_key : "342" },
+        { classified: "sub_head", code: "342E", ENdescription:"Cooling Tower", LAdescription: "ຫໍຫຼໍ່ເຢັນ (Cooling Tower) ", input_type: "text", main_key : "342" },
+        { classified: "sub_head", code: "342F", ENdescription:"Preparation of raw materials and mixing of chemicals", LAdescription: "ການກຽມວັດຖຸດິບ ແລະ ປະສົມສານເຄມີ", input_type: "text", main_key : "342" },
+        { classified: "sub_head", code: "342G", ENdescription:"cleaning the work area and equipment", LAdescription: "ການອະນາໄມ-ລ້າງທຳຄວາມສະອາດພື້ນທີ່ການຜະລິດ ແລະ ອື່ນໆ", input_type: "text", main_key : "342" },
+        { classified: "sub_head", code: "342H", ENdescription:"Laboratory", LAdescription: "ຫ້ອງປະຕິບັດການວິເຄາະ", input_type: "text", main_key : "342" },
+        { classified: "sub_head", code: "342I", ENdescription:"Another", LAdescription: "ອື່ນໆ", input_type: "text", main_key : "342" },
       ],
       form350: [
-        { classified: "heading", code: "350",  descriptionEN: "", descriptionLA: "ເອກະສານທີ່ກ່ຽວຂ້ອງ", input_type: null },
-        { classified: "sub_head", code: "350A",  descriptionEN: "", descriptionLA: "ໃບຢັ້ງຢືນກ່ຽວກັບແຫຼ່ງທີ່ມາວັດຖຸດິບ", input_type: "file", main_key : "350" },
-        { classified: "sub_head", code: "350B",  descriptionEN: "", descriptionLA: "ໃບອະນຸຍາດນຳເຂົ້າ", input_type: "file", main_key : "350" },
-        { classified: "sub_head", code: "350C",  descriptionEN: "", descriptionLA: "ໃບທະບຽນບັນຊີເຄມີ", input_type: "file", main_key : "350" },
-        { classified: "sub_head", code: "350D",  descriptionEN: "", descriptionLA: "ເອກະສານຂໍ້ມູນຄວາມປອດໄພເຄມີ (safety data sheet)", input_type: "file", main_key : "350" },
-        { classified: "sub_head", code: "350E",  descriptionEN: "", descriptionLA: "ໃບຢັ້ງຢືນຜົນການວິເຄາະເຄມີ (ກໍລະນີເປັນທາດປະສົມ)", input_type: "file", main_key : "350" },
-        { classified: "sub_head", code: "350F",  descriptionEN: "", descriptionLA: "ສະຫຼາກເຄມີ", input_type: "file", main_key : "350" },
-        { classified: "sub_head", code: "350G",  descriptionEN: "", descriptionLA: "ໃບອະນຸຍາດນຳໃຊ້ນ້ຳໜ້າດິນ", input_type: "file", main_key : "350" },
-        { classified: "sub_head", code: "350H",  descriptionEN: "", descriptionLA: "ໃບອະນຸຍາດນຳໃຊ້ນ້ຳໃຕ້ດິນ", input_type: "file", main_key : "350" },
-        { classified: "sub_head", code: "350I",  descriptionEN: "", descriptionLA: "ໃບອະນຸຍາດຂຸດເຈາະ ຫຼື ຊີເຈາະນ້ຳໃຕ້ດິນ", input_type: "file", main_key : "350" },
+        { classified: "heading", code: "350", ENdescription:"", LAdescription: "ເອກະສານທີ່ກ່ຽວຂ້ອງ", input_type: null },
+        { classified: "sub_head", code: "350A", ENdescription:"", LAdescription: "ໃບຢັ້ງຢືນກ່ຽວກັບແຫຼ່ງທີ່ມາວັດຖຸດິບ", input_type: "file", main_key : "350" },
+        { classified: "sub_head", code: "350B", ENdescription:"", LAdescription: "ໃບອະນຸຍາດນຳເຂົ້າ", input_type: "file", main_key : "350" },
+        { classified: "sub_head", code: "350C", ENdescription:"", LAdescription: "ໃບທະບຽນບັນຊີເຄມີ", input_type: "file", main_key : "350" },
+        { classified: "sub_head", code: "350D", ENdescription:"", LAdescription: "ເອກະສານຂໍ້ມູນຄວາມປອດໄພເຄມີ (safety data sheet)", input_type: "file", main_key : "350" },
+        { classified: "sub_head", code: "350E", ENdescription:"", LAdescription: "ໃບຢັ້ງຢືນຜົນການວິເຄາະເຄມີ (ກໍລະນີເປັນທາດປະສົມ)", input_type: "file", main_key : "350" },
+        { classified: "sub_head", code: "350F", ENdescription:"", LAdescription: "ສະຫຼາກເຄມີ", input_type: "file", main_key : "350" },
+        { classified: "sub_head", code: "350G", ENdescription:"", LAdescription: "ໃບອະນຸຍາດນຳໃຊ້ນ້ຳໜ້າດິນ", input_type: "file", main_key : "350" },
+        { classified: "sub_head", code: "350H", ENdescription:"", LAdescription: "ໃບອະນຸຍາດນຳໃຊ້ນ້ຳໃຕ້ດິນ", input_type: "file", main_key : "350" },
+        { classified: "sub_head", code: "350I", ENdescription:"", LAdescription: "ໃບອະນຸຍາດຂຸດເຈາະ ຫຼື ຊີເຈາະນ້ຳໃຕ້ດິນ", input_type: "file", main_key : "350" },
       ]
     };
 //************************************************ 400 ************************************************************************ */
