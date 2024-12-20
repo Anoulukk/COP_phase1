@@ -78,126 +78,96 @@ const Step1: FC<FormsData> = ({ formsData, displayFor }) => {
         valueToStore = newValue;
         localStorage.setItem(`${mainKey}-${subKey}`, valueToStore);
       } else if (type === "file") {
-        // if (newValue) {
-        //   console.log("newValue", newValue);
-      
-        //   const fileName = newValue.name;
-        //   const code = subKey;
-        //   console.log("code", code);
-
-        //   // Reference for the new file in Storage
-        //   const IDs = uuidv4();
-        //   const newStoragePath = `Files/${IDs}/${fileName}`;
-        //   const newStorageRef = ref(storage, newStoragePath);
-
-        //   // Reference to Firestore collection
-        //   const filesCollection = collection(db, "Files");
-
-        //   // Check Firestore for an existing file with the same code
-        //   const fileQuery = query(filesCollection, where("code", "==", code));
-        //   const fileSnapshot = await getDocs(fileQuery);
-
-        //   if (!fileSnapshot.empty) {
-        //     // If the file exists, delete the old one from both Storage and Firestore
-        //     fileSnapshot.forEach(async (doc) => {
-        //       const oldData = doc.data();
-        //       const oldFileURL = oldData.fileURL;
-        //       // Get the reference to the old file in Storage and delete it
-        //       const oldStorageRef = ref(storage, oldFileURL);
-        //       await deleteObject(oldStorageRef);
-        //       // Delete the old document in Firestore
-        //       await deleteDoc(doc.ref);
-        //     });
-        //   }
-        //   // Upload the new file to Firebase Storage
-        //   await uploadBytes(newStorageRef, newValue);
-        //   const fileURL = await getDownloadURL(newStorageRef);
-        //   // Add the new file details to Firestore
-        //   await addDoc(filesCollection, {
-        //     code,
-        //     fileName,
-        //     fileURL,
-        //   });
-
-        //   // get data
-        //   const querySnapshot = await getDocs(collection(db, "Files"));
-        //   const data: any = [];
-        //   querySnapshot.forEach((doc) => {
-        //     data[doc.id] = doc.data()
-        //   });
-        //   setFiles(data)
-        // } else {
-        // }
-
+     
         if (newValue) {
           const fileName = newValue.name;
           const code = subKey;
-          console.log("code", code);
-        
+          
           const IDs = uuidv4();
           const newStoragePath = `Files/${IDs}/${fileName}`;
           const newStorageRef = ref(storage, newStoragePath);
-        
+          
           const filesCollection = collection(db, "Files");
-        
+          
           if (code === "140I") {
-            // If subKey is "140I", allow multiple files to be stored
-            await uploadBytes(newStorageRef, newValue);
-            const fileURL = await getDownloadURL(newStorageRef);
-        
-            // Add the new file to the array in Firestore
-            const fileQuery = query(filesCollection, where("code", "==", code));
-            const fileSnapshot = await getDocs(fileQuery);
-        
-            if (!fileSnapshot.empty) {
-              fileSnapshot.forEach(async (doc) => {
-                const oldData = doc.data();
-                const existingFiles = oldData.files || [];
-        
-                // Add the new file to the array
-                const updatedFiles :any = [...existingFiles, { code, fileName, fileURL }];
-        
-                // Update the Firestore document with the new array
-                // await deleteDoc(doc.ref, { files: updatedFiles });
-                await updateDoc(doc.ref, { files: updatedFiles });
+            try {
+              const filesArray = Array.isArray(newValue) ? newValue : [newValue];
+              console.log({newValue});
+              // Upload each file and add to Firestore
+              const uploadPromises = filesArray.map(async (file :any) => {
+                const newStorageRef = ref(storage, `files/${file.name}`);
+                await uploadBytes(newStorageRef, file);
+                const fileURL = await getDownloadURL(newStorageRef);
+                return {
+                  code,
+                  fileName: file.name,
+                  fileURL,
+                };
               });
-            } else {
-              // If no document exists for this code, create a new one with the array
-              await addDoc(filesCollection, {
-                files: [
-                  { 
-                    code, 
-                    fileName, 
-                    fileURL 
-                  }],
-              });
+          
+              const uploadedFiles = await Promise.all(uploadPromises);
+          
+              // Query Firestore to check for existing files for this code
+              const fileQuery = query(filesCollection, where("code", "==", code));
+              const fileSnapshot = await getDocs(fileQuery);
+          
+              if (!fileSnapshot.empty) {
+                // Delete existing files from Firestore and Storage
+                const deletePromises = fileSnapshot.docs.map(async (doc) => {
+                  const oldData = doc.data();
+                  if (oldData.files && Array.isArray(oldData.files)) {
+                    const storageDeletePromises = oldData.files.map(async (oldFile) => {
+                      try {
+                        const oldStorageRef = ref(storage, oldFile.fileURL);
+                        await deleteObject(oldStorageRef);
+                      } catch (error) {
+                        console.error(`Failed to delete file ${oldFile.fileURL}:`, error);
+                      }
+                    });
+                    await Promise.all(storageDeletePromises);
+                  }
+                  try {
+                    // Delete the Firestore document
+                    await deleteDoc(doc.ref);
+                  } catch (error) {
+                    console.error("Failed to delete Firestore document:", error);
+                  }
+                });
+                await Promise.all(deletePromises);
+              }
+      
+          
+              // Add new files to Firestore
+              await addDoc(filesCollection, { files: uploadedFiles });
+            } catch (error) {
+              console.error("Error handling files:", error);
             }
           } else {
             // For other codes, replace the existing file
             const fileQuery = query(filesCollection, where("code", "==", code));
             const fileSnapshot = await getDocs(fileQuery);
-        
+
             if (!fileSnapshot.empty) {
               fileSnapshot.forEach(async (doc) => {
                 const oldData = doc.data();
                 const oldFileURL = oldData.fileURL;
-        
+
                 const oldStorageRef = ref(storage, oldFileURL);
                 await deleteObject(oldStorageRef);
                 await deleteDoc(doc.ref);
               });
             }
-        
+
             await uploadBytes(newStorageRef, newValue);
             const fileURL = await getDownloadURL(newStorageRef);
-        
+
             await addDoc(filesCollection, {
               code,
               fileName,
               fileURL,
             });
           }
-        
+
           // Fetch updated data
           const querySnapshot = await getDocs(collection(db, "Files"));
           const data: any = [];
@@ -363,11 +333,11 @@ const Step1: FC<FormsData> = ({ formsData, displayFor }) => {
               className="form-control"
               onChange={(e: any) => {
                 if (e.target.files && e.target.files.length > 0) {
-                  Array.from(e.target.files).forEach((file) => {
-                    getValues(main_key, code, file, 'file');
-                  });
+                  const files = Array.from(e.target.files);
+                  // files.forEach((file) => {
+                    getValues(main_key, code, files, 'file');
+                  // });
                 }
-                // getValues(main_key, code, e.target.files[0], 'file')}
               }}
               disabled={disabled}
               multiple
