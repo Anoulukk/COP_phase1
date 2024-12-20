@@ -7,8 +7,9 @@ import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
 import { provinceOptions, districtOptions, villageOptions } from '../Form100_800Data'
 import { handleDownload, getBase64 } from '../FunctionHelper';
 import { db, storage } from '../../../../../ConnectFirebase/Firebase';
-import { getDocs, collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getDocs, collection, addDoc, query, where, deleteDoc, updateDoc } from "firebase/firestore";
+// import { query, orderBy } from "firebase/firestore";
+import { deleteObject, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
 import { CLIENT_RENEG_WINDOW } from 'tls';
 interface NestedObject {
@@ -24,6 +25,7 @@ interface FormsData {
 const Step1: FC<FormsData> = ({ formsData, displayFor }) => {
   const [data, setData] = useState<NestedObject>();
   const [files, setFiles] = useState<NestedObject>({});
+  const [fileDetails, setFileDetails] = useState<any[]>([]);
   const [selectedProvince, setSelectedProvince] = useState<number | null>(null);
   const [selectedDistrict, setSelectedDistrict] = useState<number | null>(null);
   const [forms, setForms] = useState<any>(formsData);
@@ -60,8 +62,6 @@ const Step1: FC<FormsData> = ({ formsData, displayFor }) => {
     setSelectedDistrict(newDistrict);
   };
 
-
-
   const getValues = async (mainKey: string | undefined, subKey?: string, newValue?: string | any | undefined, type?: string) => {
     if (!newValue) {
       localStorage.removeItem(`${mainKey}-${subKey}`);
@@ -71,8 +71,6 @@ const Step1: FC<FormsData> = ({ formsData, displayFor }) => {
     if (!mainKey) return;
 
     let valueToStore: any = null;
-    const IDs = uuidv4();
-    console.log({ IDs });
 
     // Ensure both subKey and newValue are defined before setting them in localStorage
     if (mainKey && subKey && (newValue !== undefined && newValue !== null)) {
@@ -80,22 +78,135 @@ const Step1: FC<FormsData> = ({ formsData, displayFor }) => {
         valueToStore = newValue;
         localStorage.setItem(`${mainKey}-${subKey}`, valueToStore);
       } else if (type === "file") {
-        let fileURL = null;
-        let code = subKey;
+        // if (newValue) {
+        //   console.log("newValue", newValue);
+      
+        //   const fileName = newValue.name;
+        //   const code = subKey;
+        //   console.log("code", code);
+
+        //   // Reference for the new file in Storage
+        //   const IDs = uuidv4();
+        //   const newStoragePath = `Files/${IDs}/${fileName}`;
+        //   const newStorageRef = ref(storage, newStoragePath);
+
+        //   // Reference to Firestore collection
+        //   const filesCollection = collection(db, "Files");
+
+        //   // Check Firestore for an existing file with the same code
+        //   const fileQuery = query(filesCollection, where("code", "==", code));
+        //   const fileSnapshot = await getDocs(fileQuery);
+
+        //   if (!fileSnapshot.empty) {
+        //     // If the file exists, delete the old one from both Storage and Firestore
+        //     fileSnapshot.forEach(async (doc) => {
+        //       const oldData = doc.data();
+        //       const oldFileURL = oldData.fileURL;
+        //       // Get the reference to the old file in Storage and delete it
+        //       const oldStorageRef = ref(storage, oldFileURL);
+        //       await deleteObject(oldStorageRef);
+        //       // Delete the old document in Firestore
+        //       await deleteDoc(doc.ref);
+        //     });
+        //   }
+        //   // Upload the new file to Firebase Storage
+        //   await uploadBytes(newStorageRef, newValue);
+        //   const fileURL = await getDownloadURL(newStorageRef);
+        //   // Add the new file details to Firestore
+        //   await addDoc(filesCollection, {
+        //     code,
+        //     fileName,
+        //     fileURL,
+        //   });
+
+        //   // get data
+        //   const querySnapshot = await getDocs(collection(db, "Files"));
+        //   const data: any = [];
+        //   querySnapshot.forEach((doc) => {
+        //     data[doc.id] = doc.data()
+        //   });
+        //   setFiles(data)
+        // } else {
+        // }
+
         if (newValue) {
-          let fileName = newValue.name;
-          // add file to Storage in firebase
-          const storages = ref(storage, `Files/${IDs}/${fileName}`);
-          await uploadBytes(storages, newValue);
-          fileURL = await getDownloadURL(storages);
-          // add file to firestorage in firebase
-          await addDoc(collection(db, "Files"), {
-            code,
-            fileName,
-            fileURL,
-            // timestamp : serverTimestamp()
+          const fileName = newValue.name;
+          const code = subKey;
+          console.log("code", code);
+        
+          const IDs = uuidv4();
+          const newStoragePath = `Files/${IDs}/${fileName}`;
+          const newStorageRef = ref(storage, newStoragePath);
+        
+          const filesCollection = collection(db, "Files");
+        
+          if (code === "140I") {
+            // If subKey is "140I", allow multiple files to be stored
+            await uploadBytes(newStorageRef, newValue);
+            const fileURL = await getDownloadURL(newStorageRef);
+        
+            // Add the new file to the array in Firestore
+            const fileQuery = query(filesCollection, where("code", "==", code));
+            const fileSnapshot = await getDocs(fileQuery);
+        
+            if (!fileSnapshot.empty) {
+              fileSnapshot.forEach(async (doc) => {
+                const oldData = doc.data();
+                const existingFiles = oldData.files || [];
+        
+                // Add the new file to the array
+                const updatedFiles :any = [...existingFiles, { code, fileName, fileURL }];
+        
+                // Update the Firestore document with the new array
+                // await deleteDoc(doc.ref, { files: updatedFiles });
+                await updateDoc(doc.ref, { files: updatedFiles });
+              });
+            } else {
+              // If no document exists for this code, create a new one with the array
+              await addDoc(filesCollection, {
+                files: [
+                  { 
+                    code, 
+                    fileName, 
+                    fileURL 
+                  }],
+              });
+            }
+          } else {
+            // For other codes, replace the existing file
+            const fileQuery = query(filesCollection, where("code", "==", code));
+            const fileSnapshot = await getDocs(fileQuery);
+        
+            if (!fileSnapshot.empty) {
+              fileSnapshot.forEach(async (doc) => {
+                const oldData = doc.data();
+                const oldFileURL = oldData.fileURL;
+        
+                const oldStorageRef = ref(storage, oldFileURL);
+                await deleteObject(oldStorageRef);
+                await deleteDoc(doc.ref);
+              });
+            }
+        
+            await uploadBytes(newStorageRef, newValue);
+            const fileURL = await getDownloadURL(newStorageRef);
+        
+            await addDoc(filesCollection, {
+              code,
+              fileName,
+              fileURL,
+            });
+          }
+        
+          // Fetch updated data
+          const querySnapshot = await getDocs(collection(db, "Files"));
+          const data: any = [];
+          querySnapshot.forEach((doc) => {
+            data[doc.id] = doc.data();
           });
+          setFiles(data);
         }
+
       } else if (type === "multi-choice" || type === "choice") {
         valueToStore = JSON.stringify(newValue);
         localStorage.setItem(`${mainKey}-${subKey}`, valueToStore);
@@ -126,16 +237,12 @@ const Step1: FC<FormsData> = ({ formsData, displayFor }) => {
       let check = mainKey.match(/^\d+/);
       const fetchAllDocs = async () => {
         try {
+          // get data in the firebase
           const querySnapshot = await getDocs(collection(db, "Files"));
-          // orderBy
-          // const querySnapshot = await getDocs(
-          //   query(collection(db, "Files"), orderBy("timestamp", "asc"))
-          // );
-          const data: any = {};
+          const data: any = [];
           querySnapshot.forEach((doc) => {
             data[doc.id] = doc.data()
           });
-          console.log("911", data);
           // loop data for access to data
           for (const key in data) {
             let codeKey = data[key]?.code;
@@ -176,82 +283,46 @@ const Step1: FC<FormsData> = ({ formsData, displayFor }) => {
         storedData[mainKey][subKey] = value;
       }
     });
-    console.log("storedData", storedData);
-
     setSelectedProvince(localStorage.getItem(`110F3-110F3`) ? JSON.parse(localStorage.getItem(`110F3-110F3`) as string).value : null);
     setSelectedDistrict(localStorage.getItem(`110F2-110F2`) ? JSON.parse(localStorage.getItem(`110F2-110F2`) as string).value : null);
 
     setData(storedData);
-    // console.log("Loaded data from localStorage:", storedData);
-
   }, []);
-  const fileDetails: any = [];
-  for (const [key, fileData] of Object.entries(files)) {
-    console.log({ fileData });
-    fileDetails.push({
+
+  useEffect(() => {
+    const details = Object.entries(files).map(([key, fileData]) => ({
       linkFile: fileData?.fileURL || "",
       NameFile: fileData?.fileName || "",
       CodeID: fileData?.code || "",
-    });
-  }
+    }));
+    setFileDetails(details);
+  }, [files]);
+
   const renderInput = (inputType: string, descriptionLA: string, classified: string, column: any, code: string, main_key: string, duplicates: boolean, options: [string]) => {
     const isTable = inputType?.startsWith('T');
     const commonClass = classified === 'title' ? 'ms-3' : 'ms-7';
     const disabled = displayFor === 'ws';
     const storedValue = localStorage.getItem(`${main_key}-${code}`);
-   
-    // get fileName, fileURL
-    console.log(files);
- 
-    console.log("fileDetails", fileDetails);
-    
+
     const handleSelectChange = (e: any) => {
       if (code === '110F3') handleProvinceChange(e);
       if (code === '110F2') handleDistrictChange(e);
       getValues(main_key, code, e, inputType);
     };
-    console.log(code);
-    const renderFileLink = () => (
+
+    const renderFileLink = () => {
+      const file: any = fileDetails.find((item: any) => item.CodeID === code);
+      if (!file) return null;
+      localStorage.setItem(`${main_key}-${code}`, file?.linkFile);
+      return file ? (
         <a
           className="fs-5 text-primary text-decoration-underline cursor-pointer"
-          onClick={() => handleDownload(fileDetails.find((item:any) => item.CodeID == code)?.linkFile)}
+          onClick={() => handleDownload(file.linkFile)}
         >
-         {fileDetails.find((item:any) => item.CodeID == code)?.NameFile}
-
+          File: {file.NameFile}
         </a>
-    );
-    // const renderFileLink = () => {
-    //   return fileDetails.map((file :any, index :number) => {
-    //     const { linkFile, NameFile, CodeID } = file;
-    //     // let fileInput :any = document.getElementsByName(CodeID)[0] as HTMLInputElement | undefined;
-    //     let fileInput: HTMLInputElement | undefined = document.getElementsByName(CodeID)[0] as HTMLInputElement | undefined;
-
-    //     // const fileInput: HTMLInputElement | undefined =
-    //     // document.getElementsByName(CodeID)?.[0] as HTMLInputElement | undefined;
-  
-    //     console.log("fileInput", fileInput);
-    //     console.log("fileInput?.value", fileInput?.value +"==" +NameFile);
-    //     console.log("12121212", fileInput?.name +"==" +CodeID);
-    //     const valueMatches = fileInput?.value === NameFile;
-    //     const nameMatches = fileInput?.name == CodeID;
-    //     // if (NameFile === fileInput?.value && CodeID === fileInput?.name) {
-    //     console.log( nameMatches);
-    //       // if (valueMatches && nameMatches) {
-    //       return (
-    //         nameMatches && (
-    //         <a
-    //           key={index}
-    //           className="fs-5 text-primary text-decoration-underline cursor-pointer"
-    //           onClick={() => handleDownload(linkFile)}
-    //         >
-    //           File: {NameFile}
-    //         </a>
-    //         )
-    //       );
-    //     // }
-    //     // return null;
-    //   });
-    // };
+      ) : null;
+    };
 
     switch (inputType) {
       case 'text':
@@ -280,6 +351,28 @@ const Step1: FC<FormsData> = ({ formsData, displayFor }) => {
               className="form-control"
               onChange={(e: any) => getValues(main_key, code, e.target.files[0], 'file')}
               disabled={disabled}
+            />
+            {renderFileLink()}
+          </>
+        );
+
+      case 'file-D-multi':
+        return (
+          <>
+            <input
+              type="file"
+              name={code}
+              className="form-control"
+              onChange={(e: any) => {
+                if (e.target.files && e.target.files.length > 0) {
+                  Array.from(e.target.files).forEach((file) => {
+                    getValues(main_key, code, file, 'file');
+                  });
+                }
+                // getValues(main_key, code, e.target.files[0], 'file')}
+              }}
+              disabled={disabled}
+              multiple
             />
             {renderFileLink()}
           </>

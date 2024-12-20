@@ -112,6 +112,14 @@ const Horizontal: FC<HorizontalProps> = ({ enterprise_group, version_id }) => {
       storedData[category][mainKey][subKey] = value;
     }
     if (!saveToDB) {
+      Swal.fire({
+        position: "top-end",
+        icon: "info",
+        title: "u should be saved before next step...",
+        showConfirmButton: false,
+      });
+      console.log("data saved:::💖💖💖💖💖💖💖💖💖💖💖", storedData);
+      createFormData({ data: storedData });
       stepper.goNext();
     } else {
       Swal.fire({

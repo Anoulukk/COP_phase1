@@ -334,7 +334,7 @@ const lastStepTreatment = [
       { classified: "title", code: "130A",  descriptionEN: "A_health_safety_and_environment_HSE_officer", descriptionLA: "ພະນັກງານຮັບຜິດຊອບດ້ານຄວາມປອດໄພ ແລະ ສຸຂະພາບແຮງງານ", input_type: "multi-text", 
         column:{
           columnHead:[
-            {id:1, code:"130A1", descriptionEN:"Name", descriptionLA:" ຊື່່  ແລະ ນາມສະກຸນ", inputType:"text-area"}
+            {id:1, code:"130A1", descriptionEN:"Name", descriptionLA:" ຊື່  ແລະ ນາມສະກຸນ", inputType:"text-area"}
           ]
         }, 
         main_key : "130" 
