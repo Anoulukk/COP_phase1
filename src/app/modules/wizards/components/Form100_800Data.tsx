@@ -336,7 +336,7 @@ export const form100:any = {
       { classified: "sub_head", code: "140F", description: "ໃບອະນຸຍາດດຳເນີນທຸລະກິດກ່ຽວກັບເຄມີ (D1-6)", input_type: "file-D", main_key : "140" },
       { classified: "sub_head", code: "140G", description: "ໃບອະນຸຍາດໃຫ້ບໍລິການວິຊາການກ່ຽວກັບສິ່ງແວດລ້ອມ (D1-7)", input_type: "file-D", main_key : "140" },
       { classified: "sub_head", code: "140H", description: "ຊຸດເອກະສານປະຈຳຕົວຜູ້ຈັດການດ້ານສິ່ງແວດລ້ອມ (D1-8)", input_type: "file-D", main_key : "140" },
-      { classified: "sub_head", code: "140I", description: "ຊຸດເອກະສານປະຈຳຕົວວິຊາການຄຸ້ມຄອງສິ່ງແວດລ້ອມ ແລະ ເຄມີປະຈຳໂຮງງານ (D1-9)", input_type: "file-D", main_key : "140" },
+      { classified: "sub_head", code: "140I", description: "ຊຸດເອກະສານປະຈຳຕົວວິຊາການຄຸ້ມຄອງສິ່ງແວດລ້ອມ ແລະ ເຄມີປະຈຳໂຮງງານ (D1-9)", input_type: "file-D-multi", main_key : "140" },
       { classified: "sub_head", code: "140J", description: "ຊຸດເອກະສານປະຈຳຕົວພະນັກງານຮັບຜິດຊອບດ້ານຄວາມປອດໄພ (D1-10)", input_type: "file-D", main_key : "140" },
     ],
   };
