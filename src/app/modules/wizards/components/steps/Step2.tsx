@@ -121,7 +121,7 @@ const [forms, setForms] = useState<any>(formsData);
   }, []);
 
 
-  const renderInput = (inputType: string, LAdescription: string, classified: string, column:any, code:string, main_key: string,  duplicates:boolean, options?:[string]) => {
+  const renderInput = (inputType: string, descriptionLA: string, classified: string, column:any, code:string, main_key: string,  duplicates:boolean, options?:[string]) => {
     const isTable = inputType?.startsWith('T');
     switch (inputType) {
       case 'text':
@@ -130,7 +130,7 @@ const [forms, setForms] = useState<any>(formsData);
           <div className={classified === 'title' ? 'ms-3' : 'ms-7'}>
             <input
               type={inputType}
-              placeholder={LAdescription}
+              placeholder={descriptionLA}
               className="form-control"
               min={1}
               onChange={(e) => getValues(main_key, code, e.target.value, inputType)}
@@ -219,9 +219,9 @@ const [forms, setForms] = useState<any>(formsData);
       return (
         <div className="form-group mb-3" key={index}>
           {item.classified === "title"
-            ? <h4 className='ms-3'>{item.code} {item.LAdescription}</h4>
-            : <span className='fs-5 ms-7'>{item.code} {item.LAdescription}</span>}
-          {renderInput(item.input_type, item.LAdescription, item.classified, item.column, item.code, item.main_key ? item.main_key : item.code, item.duplicates, item.options)}
+            ? <h4 className='ms-3'>{item.code} {item.descriptionLA}</h4>
+            : <span className='fs-5 ms-7'>{item.code} {item.descriptionLA}</span>}
+          {renderInput(item.input_type, item.descriptionLA, item.classified, item.column, item.code, item.main_key ? item.main_key : item.code, item.duplicates, item.options)}
         </div>
       );
     });
@@ -245,7 +245,7 @@ const [forms, setForms] = useState<any>(formsData);
                 aria-expanded='false'
                 aria-controls={`kt_accordion_2_body_${idx + 1}`}
               >
-                {formKey.replace('form', '')} {forms[formKey][0]?.LAdescription}
+                {formKey.replace('form', '')} {forms[formKey][0]?.descriptionLA}
               </button>
             </h2>
             <div

@@ -6,8 +6,9 @@ import { handleDownload, getBase64 } from "./FunctionHelper";
 type Column = {
   columnHead: {
     id: number;
-    ENdescription: string;
-    LAdescription: string;
+    code?: number;
+    descriptionEN: string;
+    descriptionLA: string;
     inputType: "text-area" | "choice" | "multi-choice" | "file" | "No";
   }[];
   options: { forID: number; options: { label: string; value: string }[] }[];
@@ -31,7 +32,7 @@ const DynamicTable: FC<DynamicTableProps> = ({ data, main_key, sub_key, duplicat
     (rowIndex: number): RowData => {
       const rowData: RowData = { id: Date.now() };
       data?.columnHead.forEach((col) => {
-        rowData[col.ENdescription] = col.ENdescription === "No" ? rowIndex + 1 : "";
+        rowData[col.descriptionEN] = col.descriptionEN === "No" ? rowIndex + 1 : "";
       });
       return rowData;
     },
@@ -45,9 +46,9 @@ const DynamicTable: FC<DynamicTableProps> = ({ data, main_key, sub_key, duplicat
       return parsedData.map((table) => ({
         ...table,
         rows: table.rows.map((row, rowIndex) => {
-          const noColumn = data?.columnHead.find((col) => col.ENdescription === "No");
+          const noColumn = data?.columnHead.find((col) => col.descriptionEN === "No");
           if (noColumn) {
-            row[noColumn.ENdescription] = rowIndex + 1;
+            row[noColumn.descriptionEN] = rowIndex + 1;
           }
           return row;
         }),
@@ -77,7 +78,7 @@ const DynamicTable: FC<DynamicTableProps> = ({ data, main_key, sub_key, duplicat
   const handleAddRow = useCallback((tableIndex: number) => {
     const newRow = initializeRow(tableData[tableIndex].rows.length);
     const updatedRows = [...tableData[tableIndex].rows, newRow].map((row, index) => {
-      if (data?.columnHead.some((col) => col.ENdescription === "No")) {
+      if (data?.columnHead.some((col) => col.descriptionEN === "No")) {
         row["No"] = index + 1;
       }
       return row;
@@ -91,7 +92,7 @@ const DynamicTable: FC<DynamicTableProps> = ({ data, main_key, sub_key, duplicat
     const updatedRows = tableData[tableIndex].rows
       .filter((row) => row.id !== rowId)
       .map((row, index) => {
-        if (data?.columnHead.some((col) => col.ENdescription === "No")) {
+        if (data?.columnHead.some((col) => col.descriptionEN === "No")) {
           row["No"] = index + 1;
         }
         return row;
@@ -188,7 +189,7 @@ const DynamicTable: FC<DynamicTableProps> = ({ data, main_key, sub_key, duplicat
             <thead>
               <tr>
                 {data.columnHead.map((col) => (
-                  <th key={col.id}>{col.LAdescription}</th>
+                  <th key={col.id}>{col.code ? col.code : ""} {col.descriptionLA}</th>
                 ))}
               </tr>
             </thead>
@@ -197,16 +198,16 @@ const DynamicTable: FC<DynamicTableProps> = ({ data, main_key, sub_key, duplicat
                 <tr key={row.id}>
                   {data.columnHead.map((col) => (
                     <td key={col.id}>
-                      {col.ENdescription === "No" ? (
-                        row[col.ENdescription] // Display the row number
+                      {col.descriptionEN === "No" ? (
+                        row[col.descriptionEN] // Display the row number
                       ) : col.inputType === "text-area" ? (
                         <textarea
-                          value={row[col.ENdescription] || ""}
+                          value={row[col.descriptionEN] || ""}
                           onChange={(e) =>
                             handleInputChange(
                               tableIndex,
                               row.id,
-                              col.ENdescription,
+                              col.descriptionEN,
                               e.target.value,
                               col.inputType
                             )
@@ -218,7 +219,7 @@ const DynamicTable: FC<DynamicTableProps> = ({ data, main_key, sub_key, duplicat
                         />
                       ) : col.inputType === "choice" ? (
                         <Select
-                          name={col.ENdescription}
+                          name={col.descriptionEN}
                           className="react-select-styled ms-3"
                           classNamePrefix="react-select"
                           options={
@@ -237,17 +238,17 @@ const DynamicTable: FC<DynamicTableProps> = ({ data, main_key, sub_key, duplicat
                             handleInputChange(
                               tableIndex,
                               row.id,
-                              col.ENdescription,
+                              col.descriptionEN,
                               selectedOption,
                               col.inputType
                             )
                           }
-                          value={row[col.ENdescription]}
+                          value={row[col.descriptionEN]}
                           isDisabled={disabled}
                         />
                       ) : col.inputType === "multi-choice" ? (
                         <Select
-                          name={col.ENdescription}
+                          name={col.descriptionEN}
                           className="react-select-styled"
                           classNamePrefix="react-select"
                           menuPortalTarget={document.body}
@@ -271,12 +272,12 @@ const DynamicTable: FC<DynamicTableProps> = ({ data, main_key, sub_key, duplicat
                             handleInputChange(
                               tableIndex,
                               row.id,
-                              col.ENdescription,
+                              col.descriptionEN,
                               selectedOption,
                               col.inputType
                             )
                           }
-                          value={row[col.ENdescription]}
+                          value={row[col.descriptionEN]}
                           isMulti
                           isDisabled={disabled}
                         />
@@ -291,7 +292,7 @@ const DynamicTable: FC<DynamicTableProps> = ({ data, main_key, sub_key, duplicat
                               handleInputChange(
                                 tableIndex,
                                 row.id,
-                                col.ENdescription,
+                                col.descriptionEN,
                                 e.target.files?.[0],
                                 col.inputType
                               )
